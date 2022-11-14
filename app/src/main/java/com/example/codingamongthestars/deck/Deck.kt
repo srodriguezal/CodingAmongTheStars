@@ -8,7 +8,21 @@ class Deck {
     private val turnAroundDeck = Array(4) { "turnAround" }
     private val deck = arrayOf(goForwardDeck, rightDeck, leftDeck, turnAroundDeck).flatten()
 
-    fun dealCards(): String {
-        return deck.random()
+    fun dealCard(): String {
+        if (deck.isNotEmpty()){
+            val card = deck.random()
+            removeCardFromDeck(card)
+            return card
+
+        } else
+            return "None"
+
     }
+
+    fun removeCardFromDeck(card: String): Array<String> {
+        return deck
+            .filter { it != card }
+            .toTypedArray()
+    }
+
 }
