@@ -1,18 +1,13 @@
 package com.example.codingamongthestars.deck
 
 class Deck {
-
-    private val goForwardDeck = Array(12) { "goForward" }
-    private val rightDeck = Array(8) { "right" }
-    private val leftDeck = Array(8) { "left" }
-    private val turnAroundDeck = Array(4) { "turnAround" }
     private var deck: MutableList<String> = mutableListOf()
 
     init {
-        deck.addAll(goForwardDeck)
-        deck.addAll(rightDeck)
-        deck.addAll(leftDeck)
-        deck.addAll(turnAroundDeck)
+        deck.addAll(Array(12) { "goForward" })
+        deck.addAll(Array(8) { "right" })
+        deck.addAll(Array(8) { "left" })
+        deck.addAll(Array(4) { "turnAround" })
     }
 
 
