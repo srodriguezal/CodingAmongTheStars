@@ -2,4 +2,5 @@
     <string name="app_name">Coding Among The Stars</string>
     <string name="deck">Deck</string>
     <string name="card">card</string>
+    <string name="comenzar">COMENZAR</string>
 </resources>
