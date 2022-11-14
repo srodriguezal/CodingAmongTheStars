@@ -6,23 +6,25 @@ class Deck {
     private val rightDeck = Array(8) { "right" }
     private val leftDeck = Array(8) { "left" }
     private val turnAroundDeck = Array(4) { "turnAround" }
-    private val deck = arrayOf(goForwardDeck, rightDeck, leftDeck, turnAroundDeck).flatten()
+    private var deck: MutableList<String> = mutableListOf()
 
-    fun dealCard(): String {
-        if (deck.isNotEmpty()){
-            val card = deck.random()
-            removeCardFromDeck(card)
-            return card
-
-        } else
-            return "None"
-
+    init {
+        deck.addAll(goForwardDeck)
+        deck.addAll(rightDeck)
+        deck.addAll(leftDeck)
+        deck.addAll(turnAroundDeck)
     }
 
-    fun removeCardFromDeck(card: String): Array<String> {
-        return deck
-            .filter { it != card }
-            .toTypedArray()
+
+    fun dealCard(): String {
+        return if (deck.isNotEmpty()){
+            val card = deck.random()
+            deck.remove(card)
+            card
+
+        } else
+            "None"
+
     }
 
 }
