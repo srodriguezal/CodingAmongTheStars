@@ -21,13 +21,14 @@
 
     <Button
         android:id="@+id/helpButton"
-        android:contentDescription = "@string/help_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/help_button"
+        android:drawableBottom="@drawable/help_button"
         android:foreground="@drawable/help_button_2"
+        app:icon="@drawable/help_button_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

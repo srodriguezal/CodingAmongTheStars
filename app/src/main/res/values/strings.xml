@@ -3,4 +3,5 @@
     <string name="deck">Deck</string>
     <string name="card">card</string>
     <string name="comenzar">COMENZAR</string>
+    <string name="help_button">How to play</string>
 </resources>
