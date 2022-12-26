@@ -4,4 +4,10 @@
     <string name="card">card</string>
     <string name="comenzar">COMENZAR</string>
     <string name="help_button">How to play</string>
+    <string name="easy_level">Nivel fácil</string>
+    <string name="medium_level">Nivel intermedio</string>
+    <string name="hard_level">Nivel difícil</string>
+    <string name="kotlin_alien_image_button">Kotlin Alien</string>
+    <string name="ruby_alien_image_button">Ruby Alien</string>
+    <string name="back_characters_button_description">Button for return to level selection screen</string>
 </resources>

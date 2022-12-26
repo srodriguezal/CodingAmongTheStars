@@ -10,6 +10,7 @@
         android:id="@+id/start_button"
         android:layout_width="321dp"
         android:layout_height="76dp"
+        android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/comenzar"
         android:textSize="34sp"
         app:backgroundTint="#090909"

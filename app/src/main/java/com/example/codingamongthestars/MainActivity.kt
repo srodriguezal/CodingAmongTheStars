@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.codingamongthestars.game.GameActivity
+import com.example.codingamongthestars.game.LevelSelectionActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
-        val inicioIntent = Intent(this, GameActivity::class.java)
+        val inicioIntent = Intent(this, LevelSelectionActivity::class.java)
         startActivity(inicioIntent)
     }
 }
