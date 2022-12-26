@@ -7,7 +7,7 @@
     android:background="@drawable/board_background">
 
     <Button
-        android:id="@+id/back_characters_button"
+        android:id="@+id/back_game_button"
         android:contentDescription="@string/back_characters_button_description"
         android:layout_width="50dp"
         android:layout_height="50dp"

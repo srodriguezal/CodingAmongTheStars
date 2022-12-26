@@ -1,8 +1,10 @@
 package com.example.codingamongthestars.game
 
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Point
@@ -20,6 +22,7 @@ import com.example.codingamongthestars.deck.Deck
 
 class GameActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,8 @@ class GameActivity : AppCompatActivity() {
         val level = bundle?.getString("level")
         val character = bundle?.getString("character")
 
-        /*val characterImage: ImageView = findViewById(R.id.imageView_character)
+        // El código a continuación es solo para probar que se estén pasando los extras
+        val characterImage: ImageView = findViewById(R.id.imageView_character)
         val currentLevel: TextView = findViewById(R.id.textView_level)
 
         currentLevel.text = level
@@ -37,7 +41,14 @@ class GameActivity : AppCompatActivity() {
         when (character){
             "kotlin" -> characterImage.setImageResource(R.drawable.kotlin_200x200)
             "ruby" -> characterImage.setImageResource(R.drawable.ruby_200x200)
-        }*/
+        }
+        ///
+
+        val backButton : Button = findViewById(R.id.back_game_button)
+
+        backButton.setOnClickListener {
+            backToSelectCharacter(level)
+        }
 
         val deck = Deck()
         val newCard1Image: ImageView = findViewById(R.id.imgViewNewCard1)
@@ -77,7 +88,13 @@ class GameActivity : AppCompatActivity() {
 
         }
 
-        private fun setPlayerDeck(
+    private fun backToSelectCharacter(level : String?) {
+        val backIntent = Intent(this, CharacterSelectionActivity::class.java)
+        backIntent.putExtra("level", level)
+        startActivity(backIntent)
+    }
+
+    private fun setPlayerDeck(
             deck: Deck, card1: ImageView, card2: ImageView, card3: ImageView,
             card4: ImageView
         ) {

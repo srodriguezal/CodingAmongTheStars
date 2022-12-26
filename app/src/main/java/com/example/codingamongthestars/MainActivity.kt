@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
-        val inicioIntent = Intent(this, LevelSelectionActivity::class.java)
-        startActivity(inicioIntent)
+        val startIntent = Intent(this, LevelSelectionActivity::class.java)
+        startActivity(startIntent)
     }
 }

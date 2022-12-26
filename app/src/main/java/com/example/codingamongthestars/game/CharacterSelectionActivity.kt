@@ -18,6 +18,7 @@ class CharacterSelectionActivity : AppCompatActivity() {
 
         val kotlinButton: Button = findViewById(R.id.kotlin_button)
         val rubyButton: Button = findViewById(R.id.ruby_button)
+        val backButton: Button = findViewById(R.id.back_characters_button)
 
         kotlinButton.setOnClickListener {
             startGame("kotlin", level)
@@ -26,6 +27,9 @@ class CharacterSelectionActivity : AppCompatActivity() {
         rubyButton.setOnClickListener {
             startGame("ruby", level)
         }
+        backButton.setOnClickListener {
+            backToLevelSelection()
+        }
     }
 
     private fun startGame(character: String, level: String?){
@@ -33,5 +37,10 @@ class CharacterSelectionActivity : AppCompatActivity() {
         startGameIntent.putExtra("level", level)
         startGameIntent.putExtra("character", character)
         startActivity(startGameIntent)
+    }
+
+    private fun backToLevelSelection() {
+        val backIntent = Intent(this, LevelSelectionActivity::class.java)
+        startActivity(backIntent)
     }
 }
