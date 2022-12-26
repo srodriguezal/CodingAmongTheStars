@@ -8,13 +8,13 @@
 
     <Button
         android:id="@+id/easyLevelButton"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/easy_level"
-        android:textSize="20sp"
+        android:textSize="65sp"
         app:layout_constraintBottom_toTopOf="@+id/mediumLevelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,26 +23,38 @@
 
     <Button
         android:id="@+id/mediumLevelButton"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/medium_level"
-        android:textSize="20sp"
+        android:textSize="65sp"
         app:layout_constraintBottom_toTopOf="@+id/hardLevelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/hardLevelButton"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="60dp"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/hard_level"
-        android:textSize="20sp"
+        android:textSize="65sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/back_levels_button"
+        android:contentDescription="@string/back_levels_button_description"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/back_arrow"
+        android:foreground="@drawable/front_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
