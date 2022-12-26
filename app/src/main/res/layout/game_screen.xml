@@ -7,6 +7,18 @@
     android:background="@drawable/board_background">
 
     <Button
+        android:id="@+id/back_characters_button"
+        android:contentDescription="@string/back_characters_button_description"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/back_arrow"
+        android:foreground="@drawable/front_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/deck_button"
         android:layout_width="76dp"
         android:layout_height="111dp"
@@ -115,6 +127,28 @@
         app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/cementary"
         tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageView_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="412dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blank_path" />
+
+    <TextView
+        android:id="@+id/textView_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="92dp"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

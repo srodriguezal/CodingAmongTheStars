@@ -13,20 +13,25 @@ class CharacterSelectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.character_selection_screen)
 
+        val bundle = intent.extras
+        val level = bundle?.getString("level")
+
         val kotlinButton: Button = findViewById(R.id.kotlin_button)
         val rubyButton: Button = findViewById(R.id.ruby_button)
 
         kotlinButton.setOnClickListener {
-            startGame()
+            startGame("kotlin", level)
         }
 
         rubyButton.setOnClickListener {
-            startGame()
+            startGame("ruby", level)
         }
     }
 
-    private fun startGame(){
-        val inicioIntent = Intent(this, GameActivity::class.java)
-        startActivity(inicioIntent)
+    private fun startGame(character: String, level: String?){
+        val startGameIntent = Intent(this, GameActivity::class.java)
+        startGameIntent.putExtra("level", level)
+        startGameIntent.putExtra("character", character)
+        startActivity(startGameIntent)
     }
 }

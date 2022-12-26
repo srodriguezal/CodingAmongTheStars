@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
@@ -23,6 +24,20 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
+
+        val bundle = intent.extras
+        val level = bundle?.getString("level")
+        val character = bundle?.getString("character")
+
+        /*val characterImage: ImageView = findViewById(R.id.imageView_character)
+        val currentLevel: TextView = findViewById(R.id.textView_level)
+
+        currentLevel.text = level
+
+        when (character){
+            "kotlin" -> characterImage.setImageResource(R.drawable.kotlin_200x200)
+            "ruby" -> characterImage.setImageResource(R.drawable.ruby_200x200)
+        }*/
 
         val deck = Deck()
         val newCard1Image: ImageView = findViewById(R.id.imgViewNewCard1)

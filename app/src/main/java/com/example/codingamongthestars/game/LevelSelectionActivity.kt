@@ -16,20 +16,21 @@ class LevelSelectionActivity : AppCompatActivity() {
         val hardLevelButton: Button = findViewById(R.id.hardLevelButton)
 
         easyLevelButton.setOnClickListener {
-            selectCharacter()
+            selectCharacter("easy")
         }
 
         mediumLevelButton.setOnClickListener {
-            selectCharacter()
+            selectCharacter("medium")
         }
 
         hardLevelButton.setOnClickListener {
-            selectCharacter()
+            selectCharacter("hard")
         }
     }
 
-    private fun selectCharacter(){
-        val inicioIntent = Intent(this, CharacterSelectionActivity::class.java)
-        startActivity(inicioIntent)
+    private fun selectCharacter(level : String){
+        val intentCharacterSelection = Intent(this, CharacterSelectionActivity::class.java)
+        intentCharacterSelection.putExtra("level", level)
+        startActivity(intentCharacterSelection)
     }
 }
