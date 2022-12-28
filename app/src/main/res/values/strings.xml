@@ -6,9 +6,9 @@
     <string name="easy_level">Nivel fácil</string>
     <string name="medium_level">Nivel medio</string>
     <string name="hard_level">Nivel difícil</string>
-    <string name="kotlin_button">Kotlin button in selection character screen</string>
-    <string name="ruby_button">Ruby button in selection character screen</string>
-    <string name="back_button">Back button</string>
+    <string name="kotlin_button">Choose Kotlin in selection character screen</string>
+    <string name="ruby_button">Choose Ruby in selection character screen</string>
+    <string name="back_button">Return to prevoius screen</string>
     <string name="help_button">Learn how to play</string>
 
 </resources>
