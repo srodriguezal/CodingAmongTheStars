@@ -1,14 +1,13 @@
 package com.example.codingamongthestars.game
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
 
 class CharacterSelectionActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.character_selection_screen)
@@ -16,9 +15,9 @@ class CharacterSelectionActivity : AppCompatActivity() {
         val bundle = intent.extras
         val level = bundle?.getString("level")
 
-        val kotlinButton: Button = findViewById(R.id.kotlin_button)
-        val rubyButton: Button = findViewById(R.id.ruby_button)
-        val backButton: Button = findViewById(R.id.back_characters_button)
+        val kotlinButton: ImageView = findViewById(R.id.kotlin_button)
+        val rubyButton: ImageView = findViewById(R.id.ruby_button)
+        val backButton: ImageView = findViewById(R.id.back_characters_button)
 
         kotlinButton.setOnClickListener {
             startGame("kotlin", level)

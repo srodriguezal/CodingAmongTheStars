@@ -1,7 +1,5 @@
 package com.example.codingamongthestars.game
 
-
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
@@ -12,7 +10,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -22,7 +19,6 @@ import com.example.codingamongthestars.deck.Deck
 
 class GameActivity : AppCompatActivity() {
 
-    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +40,7 @@ class GameActivity : AppCompatActivity() {
         }
         ///
 
-        val backButton : Button = findViewById(R.id.back_game_button)
+        val backButton : ImageView = findViewById(R.id.back_game_button)
 
         backButton.setOnClickListener {
             backToSelectCharacter(level)
@@ -77,7 +73,7 @@ class GameActivity : AppCompatActivity() {
 
             setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
 
-            val deckRollButton: Button = findViewById(R.id.deck_button)
+            val deckRollButton: ImageView = findViewById(R.id.deck_button)
 
             deckRollButton.setOnClickListener {
                 newCard1Image.visibility = View.VISIBLE

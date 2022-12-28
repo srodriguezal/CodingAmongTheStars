@@ -20,16 +20,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.859" />
 
-    <Button
+    <ImageView
         android:id="@+id/helpButton"
         android:contentDescription = "@string/help_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/help_button"
-        android:foreground="@drawable/help_button_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/help_button" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

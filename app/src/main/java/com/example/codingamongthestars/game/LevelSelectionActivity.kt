@@ -3,6 +3,7 @@ package com.example.codingamongthestars.game
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.MainActivity
 import com.example.codingamongthestars.R
@@ -15,7 +16,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         val easyLevelButton: Button = findViewById(R.id.easyLevelButton)
         val mediumLevelButton: Button = findViewById(R.id.mediumLevelButton)
         val hardLevelButton: Button = findViewById(R.id.hardLevelButton)
-        val backButton: Button = findViewById(R.id.back_levels_button)
+        val backButton: ImageView = findViewById(R.id.back_levels_button)
 
         easyLevelButton.setOnClickListener {
             selectCharacter("easy")
