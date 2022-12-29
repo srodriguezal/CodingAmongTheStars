@@ -153,19 +153,19 @@ class GameActivity : AppCompatActivity() {
             val randomNumber1 = (0 until numCells).random()
             val randomNumber2 = (0 until numCells).random()
             val selectedCell = matrix_board[randomNumber1][randomNumber2]
-            if (selectedCell?.image == "path"){
-                selectedCell.image = typeEnemy
-                matrix_board[randomNumber1][randomNumber2] = selectedCell
+            if (selectedCell?.image.equals("path")){
+                val newCell = Cell(typeEnemy)
+                matrix_board[randomNumber1][randomNumber2] = newCell
             } else {
                 val newPosition = foundFreePath(0, 0)
-                selectedCell?.image = typeEnemy
-                matrix_board[newPosition[0]][newPosition[1]] = selectedCell
+                val newCell = Cell(typeEnemy)
+                matrix_board[newPosition[0]][newPosition[1]] = newCell
             }
         }
     }
 
     private fun foundFreePath(x: Int, y: Int): Array<Int>{
-        if (matrix_board[x][y]?.image == "path")
+        if (matrix_board[x][y]?.image.equals( "path"))
             return arrayOf(x, y)
         else{
             var xResult = 0
@@ -185,24 +185,17 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun createVisualBoard(board: TableLayout, maxCells: Int){
-        //var matrix : Array<Array<Int>> = emptyArray()
-        /*for (i in (0 until num)){
-                val cell = LayoutInflater.from(this).inflate(R.layout.custom_row_table_lvl1, null, false)
-                board.addView(cell)
-            }*/
         for (i in (0 until maxCells)){
             val row = TableRow(this)
+            row.removeAllViews()
             for (j in (0 until maxCells)){
                 val cell = ImageView(this)
                 when (matrix_board[i][j]?.image){
-                    "path" -> cell.setImageResource(R.drawable.back_path)
                     "planet01" -> cell.setImageResource(R.drawable.bitrise_01_100x100)
                     "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
                     "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
                     "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
-                    "block" -> cell.setImageResource(R.drawable.bricks_100x100)
-                    "bug" -> cell.setImageResource(R.drawable.bug_100x100)
-                    "cpu" -> cell.setImageResource(R.drawable.cpu_100x100)
+                    else -> cell.setImageResource(R.drawable.back_path_100x100)
                 }
                 row.addView(cell)
             }
