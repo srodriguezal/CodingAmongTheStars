@@ -2,21 +2,22 @@ package com.example.codingamongthestars.game
 
 //import android.content.ClipData
 //import android.content.ClipDescription
-import android.content.Intent
 //import android.graphics.Canvas
 //import android.graphics.Color
 //import android.graphics.Point
 //import android.graphics.drawable.ColorDrawable
 //import android.os.Build
+//import androidx.annotation.RequiresApi
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
-//import androidx.annotation.RequiresApi
+import android.widget.TableRow
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
 import com.example.codingamongthestars.deck.Deck
+
 
 var matrix_board : Array<Array<Cell?>> = emptyArray()
 
@@ -190,22 +191,22 @@ class GameActivity : AppCompatActivity() {
                 board.addView(cell)
             }*/
         for (i in (0 until maxCells)){
+            val row = TableRow(this)
             for (j in (0 until maxCells)){
-                val cell = LayoutInflater.from(this).inflate(R.layout.custom_cell, null, false)
-                board.addView(cell)
-                val cellImage : ImageView = findViewById(R.id.imagePath)
+                val cell = ImageView(this)
                 when (matrix_board[i][j]?.image){
-                    "path" -> cellImage.setImageResource(R.drawable.back_path)
-                    "planet01" -> cellImage.setImageResource(R.drawable.bitrise_01_100x100)
-                    "planet02" -> cellImage.setImageResource(R.drawable.bitrise_02_100x100)
-                    "planet03" -> cellImage.setImageResource(R.drawable.bitrise_03_100x100)
-                    "planet04" -> cellImage.setImageResource(R.drawable.bitrise_04_100x100)
-                    "bug" -> cellImage.setImageResource(R.drawable.bug_100x100)
-                    "cpu" -> cellImage.setImageResource(R.drawable.cpu_100x100)
+                    "path" -> cell.setImageResource(R.drawable.back_path)
+                    "planet01" -> cell.setImageResource(R.drawable.bitrise_01_100x100)
+                    "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
+                    "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
+                    "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
+                    "block" -> cell.setImageResource(R.drawable.bricks_100x100)
+                    "bug" -> cell.setImageResource(R.drawable.bug_100x100)
+                    "cpu" -> cell.setImageResource(R.drawable.cpu_100x100)
                 }
+                row.addView(cell)
             }
-            //val row = LayoutInflater.from(this).inflate(R.layout.custom_row, null, false)
-            //board.addView(row)
+            board.addView(row)
         }
     }
 
