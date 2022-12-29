@@ -10,5 +10,6 @@
     <string name="ruby_button">Choose Ruby in selection character screen</string>
     <string name="back_button">Return to prevoius screen</string>
     <string name="help_button">Learn how to play</string>
+    <string name="path_image">Image of the path</string>
 
 </resources>
