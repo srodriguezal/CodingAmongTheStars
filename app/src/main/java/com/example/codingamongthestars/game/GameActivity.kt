@@ -90,17 +90,17 @@ class GameActivity : AppCompatActivity() {
         when (level) {
             "easy" -> {
                 createMatrix(character,4, 4, 1, 0)
-                createVisualBoard(board, 4)
+                createVisualBoard(board, 4, level)
 
             }
             "medium" -> {
                 createMatrix(character,6, 6, 2, 1)
-                createVisualBoard(board, 6)
+                createVisualBoard(board, 6, level)
 
             }
             "hard" -> {
                 createMatrix(character,8, 18, 4, 2)
-                createVisualBoard(board, 8)
+                createVisualBoard(board, 8, level)
 
             }
         }
@@ -191,21 +191,50 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun createVisualBoard(board: TableLayout, maxCells: Int){
+    private fun createVisualBoard(board: TableLayout, maxCells: Int, level: String?){
         for (i in (0 until maxCells)){
             val row = TableRow(this)
             row.removeAllViews()
             for (j in (0 until maxCells)){
                 val cell = ImageView(this)
-                when (matrix_board[i][j]?.image){
-                    "planet01" -> cell.setImageResource(R.drawable.bitrise_01_100x100)
-                    "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
-                    "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
-                    "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
-                    "kotlin" -> cell.setImageResource(R.drawable.kotlin_100x100)
-                    "ruby" -> cell.setImageResource(R.drawable.ruby_100x100)
-                    else -> cell.setImageResource(R.drawable.back_path_100x100)
+                when(level){
+                    "easy" ->{
+                        when (matrix_board[i][j]?.image){
+                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_100x100)
+                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
+                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
+                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
+                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_100x100)
+                            "ruby" -> cell.setImageResource(R.drawable.ruby_100x100)
+                            else -> cell.setImageResource(R.drawable.back_path_100x100)
+                        }
+
+                    }
+                    "medium" -> {
+                        when (matrix_board[i][j]?.image){
+                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_75x75)
+                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_75x75)
+                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_75x75)
+                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_75x75)
+                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_75x75)
+                            "ruby" -> cell.setImageResource(R.drawable.ruby_75x75)
+                            else -> cell.setImageResource(R.drawable.back_path_75x75)
+                        }
+                    }
+                    "hard" -> {
+                        when (matrix_board[i][j]?.image){
+                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_60x60)
+                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_60x60)
+                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_60x60)
+                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_60x60)
+                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_60x60)
+                            "ruby" -> cell.setImageResource(R.drawable.ruby_60x60)
+                            else -> cell.setImageResource(R.drawable.back_path_60x60)
+                        }
+                    }
+
                 }
+
                 row.addView(cell)
             }
             board.addView(row)
