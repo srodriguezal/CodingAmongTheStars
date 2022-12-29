@@ -31,9 +31,6 @@ class GameActivity : AppCompatActivity() {
         val bundle = intent.extras
         val level = bundle?.getString("level")
         val character = bundle?.getString("character")
-        val characterImage : ImageView = findViewById(R.id.imageView_character)
-
-        setCharacter(character, characterImage)
 
         val backButton: ImageView = findViewById(R.id.back_game_button)
 
@@ -43,7 +40,7 @@ class GameActivity : AppCompatActivity() {
 
         val board: TableLayout = findViewById(R.id.gameTableLayout)
         board.removeAllViews()
-        setBoard(level, board)
+        setBoard(level, character, board)
 
         val deck = Deck()
         val newCard1Image: ImageView = findViewById(R.id.imgViewNewCard1)
@@ -89,32 +86,26 @@ class GameActivity : AppCompatActivity() {
         startActivity(backIntent)
     }
 
-    private fun setCharacter(character : String?, characterImage : ImageView){
-        when(character){
-            "kotlin" -> characterImage.setImageResource(R.drawable.kotlin_100x100)
-            "ruby" -> characterImage.setImageResource(R.drawable.ruby_100x100)
-        }
-    }
-    private fun setBoard(level: String?, board: TableLayout) {
+    private fun setBoard(level: String?, character: String?, board: TableLayout) {
         when (level) {
             "easy" -> {
-                createMatrix(4, 4, 1, 0)
+                createMatrix(character,4, 4, 1, 0)
                 createVisualBoard(board, 4)
 
             }
             "medium" -> {
-                createMatrix(6, 6, 2, 1)
+                createMatrix(character,6, 6, 2, 1)
                 createVisualBoard(board, 6)
 
             }
             "hard" -> {
-                createMatrix(8, 18, 4, 2)
-                createVisualBoard(board,8)
+                createMatrix(character,8, 18, 4, 2)
+                createVisualBoard(board, 8)
 
             }
         }
     }
-    private fun createMatrix(numCells : Int, numBlocks: Int, numBugs: Int, numCPUs: Int){
+    private fun createMatrix(character: String?, numCells : Int, numBlocks: Int, numBugs: Int, numCPUs: Int){
         val matrix = Array(numCells){Array<Cell?>(numCells){null} }
         for (i in (0 until numCells)){
             for (j in(0 until  numCells)){
@@ -143,9 +134,25 @@ class GameActivity : AppCompatActivity() {
             }
         }
         matrix_board = matrix
+        setCharacter(character, numCells)
         setSpecialCells(numCells, "block", numBlocks)
         setSpecialCells(numCells, "bug", numBugs)
         setSpecialCells(numCells, "cpu", numCPUs)
+
+
+    }
+
+    private fun setCharacter(character: String?, numCells: Int){
+        when(character){
+            "kotlin" -> {
+                val characterCell = Cell("kotlin")
+                matrix_board[numCells-1][0] = characterCell
+            }
+            "ruby" -> {
+                val characterCell = Cell("ruby")
+                matrix_board[numCells-1][0] = characterCell
+            }
+        }
     }
 
     private fun setSpecialCells(numCells: Int, typeEnemy: String, numEnemies: Int){
@@ -153,29 +160,29 @@ class GameActivity : AppCompatActivity() {
             val randomNumber1 = (0 until numCells).random()
             val randomNumber2 = (0 until numCells).random()
             val selectedCell = matrix_board[randomNumber1][randomNumber2]
-            if (selectedCell?.image.equals("path")){
+            if ((selectedCell?.image.equals("path"))){
                 val newCell = Cell(typeEnemy)
                 matrix_board[randomNumber1][randomNumber2] = newCell
             } else {
-                val newPosition = foundFreePath(0, 0)
+                val newPosition = foundFreePath(numCells,0, 0)
                 val newCell = Cell(typeEnemy)
                 matrix_board[newPosition[0]][newPosition[1]] = newCell
             }
         }
     }
 
-    private fun foundFreePath(x: Int, y: Int): Array<Int>{
+    private fun foundFreePath(numCells: Int, x: Int, y: Int): Array<Int>{
         if (matrix_board[x][y]?.image.equals( "path"))
             return arrayOf(x, y)
         else{
             var xResult = 0
             var yResult = 0
             if (x+1 < matrix_board[0].size) {
-                val result = foundFreePath(x + 1, y)
+                val result = foundFreePath(numCells, x + 1, y)
                 xResult = result[0]
                 yResult = result[1]
             } else if (y+1 < matrix_board[0].size){
-                val result= foundFreePath(x, y+1)
+                val result= foundFreePath(numCells, x, y+1)
                 xResult = result[0]
                 yResult = result[1]
             }
@@ -195,6 +202,8 @@ class GameActivity : AppCompatActivity() {
                     "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
                     "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
                     "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
+                    "kotlin" -> cell.setImageResource(R.drawable.kotlin_100x100)
+                    "ruby" -> cell.setImageResource(R.drawable.ruby_100x100)
                     else -> cell.setImageResource(R.drawable.back_path_100x100)
                 }
                 row.addView(cell)

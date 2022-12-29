@@ -65,7 +65,7 @@
         android:contentDescription="card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.947"
@@ -125,16 +125,6 @@
         app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/cementary"
         tools:ignore="ImageContrastCheck" />
-
-    <ImageView
-        android:id="@+id/imageView_character"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="224dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_path" />
 
     <TableLayout
         android:id="@+id/gameTableLayout"
