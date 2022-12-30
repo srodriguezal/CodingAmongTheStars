@@ -7,7 +7,8 @@ class Deck {
         deck.addAll(Array(12) { "goForward" })
         deck.addAll(Array(8) { "right" })
         deck.addAll(Array(8) { "left" })
-        deck.addAll(Array(4) { "turnAround" })
+        deck.addAll(Array(4) { "down" })
+        deck.addAll(Array(4) { "up" })
     }
 
 

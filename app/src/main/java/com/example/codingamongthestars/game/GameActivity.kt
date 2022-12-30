@@ -261,7 +261,7 @@ class GameActivity : AppCompatActivity() {
                 matrixBoard[i][j].id = cell.id
                 when (level) {
                     "easy" -> {
-                        showCellEasyLevel(matrixBoard[i][j].image, cell, true)
+                        showCellEasyLevel(matrixBoard[i][j].image, cell, false)
                     }
                     "medium" -> {
                         showCellMediumLevel(matrixBoard[i][j].image, cell, true)
@@ -279,81 +279,11 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    /// METODO SOLO PARA PRUEBAS BORRAR DESPUES
-    /*private fun createAllVisualBoard(board: TableLayout, maxCells: Int, level: String?) {
-        for (i in (0 until maxCells)) {
-            val row = TableRow(this)
-            row.removeAllViews()
-            for (j in (0 until maxCells)) {
-                val cell = ImageView(this)
-                when (level) {
-                    "easy" -> {
-                        when (matrixBoard[i][j]?.image) {
-                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_100x100)
-                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_100x100)
-                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_100x100)
-                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_100x100)
-                            "path" -> cell.setImageResource(R.drawable.back_path_100x100)
-                            "bug" -> cell.setImageResource(R.drawable.bug_100x100)
-                            "block" -> cell.setImageResource(R.drawable.bricks_100x100)
-                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_100x100)
-                            "ruby" -> cell.setImageResource(R.drawable.ruby_100x100)
-                        }
-
-                    }
-                    "medium" -> {
-                        when (matrixBoard[i][j]?.image) {
-                            "path" -> cell.setImageResource(R.drawable.back_path_75x75)
-                            "bug" -> cell.setImageResource(R.drawable.bug_75x75)
-                            "cpu" -> cell.setImageResource(R.drawable.cpu_75x75)
-                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_75x75)
-                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_75x75)
-                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_75x75)
-                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_75x75)
-                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_75x75)
-                            "ruby" -> cell.setImageResource(R.drawable.ruby_75x75)
-                            "block" -> cell.setImageResource(R.drawable.bricks_75x75)
-                        }
-                    }
-                    "hard" -> {
-                        when (matrixBoard[i][j]?.image) {
-                            "path" -> cell.setImageResource(R.drawable.back_path_60x60)
-                            "bug" -> cell.setImageResource(R.drawable.bug_60x60)
-                            "cpu" -> cell.setImageResource(R.drawable.cpu_60x60)
-                            "planet01" -> cell.setImageResource(R.drawable.bitrise_01_60x60)
-                            "planet02" -> cell.setImageResource(R.drawable.bitrise_02_60x60)
-                            "planet03" -> cell.setImageResource(R.drawable.bitrise_03_60x60)
-                            "planet04" -> cell.setImageResource(R.drawable.bitrise_04_60x60)
-                            "kotlin" -> cell.setImageResource(R.drawable.kotlin_60x60)
-                            "ruby" -> cell.setImageResource(R.drawable.ruby_60x60)
-                            "block" -> cell.setImageResource(R.drawable.bricks_60x60)
-                        }
-                    }
-
-                }
-
-                row.addView(cell)
-            }
-            board.addView(row)
-        }
-    }*/
-
-
-    /////
-
     private fun showCellEasyLevel(
         cellContent: String?,
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
-        if (!settingBoard) {
-            when (cellContent) {
-                "path" -> cellImageView.setImageResource(R.drawable.path_100x100)
-                "bug" -> cellImageView.setImageResource(R.drawable.bug_100x100)
-                "block" -> cellImageView.setImageResource(R.drawable.bricks_100x100)
-            }
-        }
-
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_100x100)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_100x100)
@@ -361,8 +291,21 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_100x100)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_100x100)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_100x100)
-
-            else -> cellImageView.setImageResource(R.drawable.back_path_100x100)
+            "path" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.path_100x100)
+                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
+            }
+            "bug" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bug_100x100)
+                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
+            }
+            "block" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bricks_100x100)
+                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
+            }
 
         }
 
@@ -374,15 +317,6 @@ class GameActivity : AppCompatActivity() {
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
-        if (!settingBoard) {
-            when (cellContent) {
-                "path" -> cellImageView.setImageResource(R.drawable.path_75x75)
-                "bug" -> cellImageView.setImageResource(R.drawable.bug_75x75)
-                "cpu" -> cellImageView.setImageResource(R.drawable.cpu_75x75)
-                "block" -> cellImageView.setImageResource(R.drawable.bricks_75x75)
-
-            }
-        }
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_75x75)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_75x75)
@@ -390,7 +324,35 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_75x75)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_75x75)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_75x75)
-            else -> cellImageView.setImageResource(R.drawable.back_path_75x75)
+            "path" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.path_75x75)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_75x75)
+                }
+            }
+            "bug" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bug_75x75)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_75x75)
+                }
+            }
+            "cpu" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.cpu_75x75)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_75x75)
+                }
+            }
+            "block" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bricks_75x75)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_75x75)
+                }
+            }
+
         }
 
     }
@@ -400,15 +362,6 @@ class GameActivity : AppCompatActivity() {
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
-        if (!settingBoard) {
-            when (cellContent) {
-                "path" -> cellImageView.setImageResource(R.drawable.path_60x60)
-                "bug" -> cellImageView.setImageResource(R.drawable.bug_60x60)
-                "cpu" -> cellImageView.setImageResource(R.drawable.cpu_60x60)
-                "block" -> cellImageView.setImageResource(R.drawable.bricks_60x60)
-
-            }
-        }
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_60x60)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_60x60)
@@ -416,7 +369,35 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_60x60)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_60x60)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_60x60)
-            else -> cellImageView.setImageResource(R.drawable.back_path_60x60)
+            "path" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.path_60x60)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_60x60)
+                }
+            }
+            "bug" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bug_60x60)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_60x60)
+                }
+            }
+            "cpu" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.cpu_60x60)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_60x60)
+                }
+            }
+            "block" -> {
+                if (!settingBoard) {
+                    cellImageView.setImageResource(R.drawable.bricks_60x60)
+                } else {
+                    cellImageView.setImageResource(R.drawable.back_path_60x60)
+                }
+            }
+
         }
 
     }
@@ -451,7 +432,8 @@ class GameActivity : AppCompatActivity() {
             "goForward" -> cardImage.setImageResource(R.drawable.card_go_forward)
             "right" -> cardImage.setImageResource(R.drawable.card_right)
             "left" -> cardImage.setImageResource(R.drawable.card_left)
-            "turnAround" -> cardImage.setImageResource(R.drawable.card_turn_around)
+            "down" -> cardImage.setImageResource(R.drawable.card_down)
+            "up" -> cardImage.setImageResource(R.drawable.card_up)
             "None" -> cardImage.setImageResource(R.drawable.card_back)
 
         }
@@ -526,44 +508,40 @@ class GameActivity : AppCompatActivity() {
                 }
 
             }
-            "turnAround" -> {
-                if (character.orientation == "up") {
-                    character.orientation = "down"
-                    if (character.getName() == "kotlin") {
-                        when (level) {
-                            "easy" -> characterCell.setImageResource(R.drawable.kotlin_back_100x100)
-                            "medium" -> characterCell.setImageResource(R.drawable.kotlin_back_75x75)
-                            "hard" -> characterCell.setImageResource(R.drawable.kotlin_back_60x60)
-                        }
-
-                    } else {
-                        when (level) {
-                            "easy" -> characterCell.setImageResource(R.drawable.ruby_back_100x100)
-                            "medium" -> characterCell.setImageResource(R.drawable.ruby_back_75x75)
-                            "hard" -> characterCell.setImageResource(R.drawable.ruby_back_60x60)
-                        }
+            "down" -> {
+                character.orientation = "down"
+                if (character.getName() == "kotlin") {
+                    when (level) {
+                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_back_100x100)
+                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_back_75x75)
+                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_back_60x60)
                     }
 
-                } else if (character.orientation == "down") {
-                    character.orientation = "up"
-                    if (character.getName() == "kotlin") {
-                        when (level) {
-                            "easy" -> characterCell.setImageResource(R.drawable.kotlin_100x100)
-                            "medium" -> characterCell.setImageResource(R.drawable.kotlin_75x75)
-                            "hard" -> characterCell.setImageResource(R.drawable.kotlin_60x60)
-                        }
-
-                    } else {
-                        when (level) {
-                            "easy" -> characterCell.setImageResource(R.drawable.ruby_100x100)
-                            "medium" -> characterCell.setImageResource(R.drawable.ruby_75x75)
-                            "hard" -> characterCell.setImageResource(R.drawable.ruby_60x60)
-                        }
+                } else {
+                    when (level) {
+                        "easy" -> characterCell.setImageResource(R.drawable.ruby_back_100x100)
+                        "medium" -> characterCell.setImageResource(R.drawable.ruby_back_75x75)
+                        "hard" -> characterCell.setImageResource(R.drawable.ruby_back_60x60)
                     }
                 }
-
             }
+            "up" -> {
+                character.orientation = "down"
+                if (character.getName() == "kotlin") {
+                    when (level) {
+                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_100x100)
+                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_75x75)
+                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_60x60)
+                    }
 
+                } else {
+                    when (level) {
+                        "easy" -> characterCell.setImageResource(R.drawable.ruby_100x100)
+                        "medium" -> characterCell.setImageResource(R.drawable.ruby_75x75)
+                        "hard" -> characterCell.setImageResource(R.drawable.ruby_60x60)
+                    }
+                }
+            }
         }
     }
 
