@@ -48,7 +48,7 @@ class GameActivity : AppCompatActivity() {
         val newCardImage: ImageView = findViewById(R.id.imgViewNewCard)
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         card1Image.setOnClickListener {
-            if (playerDeck.size == 4){
+            if (playerDeck.size == 4) {
                 playCard(card1Image, 0, level)
             } else {
                 //Mostrar error
@@ -58,7 +58,7 @@ class GameActivity : AppCompatActivity() {
 
         val card2Image: ImageView = findViewById(R.id.imgViewCard2)
         card2Image.setOnClickListener {
-            if (playerDeck.size == 4){
+            if (playerDeck.size == 4) {
                 playCard(card2Image, 1, level)
             } else {
                 //Mostrar error
@@ -67,7 +67,7 @@ class GameActivity : AppCompatActivity() {
 
         val card3Image: ImageView = findViewById(R.id.imgViewCard3)
         card3Image.setOnClickListener {
-            if (playerDeck.size == 4){
+            if (playerDeck.size == 4) {
                 playCard(card3Image, 2, level)
             } else {
                 //Mostrar error
@@ -76,7 +76,7 @@ class GameActivity : AppCompatActivity() {
 
         val card4Image: ImageView = findViewById(R.id.imgViewCard4)
         card4Image.setOnClickListener {
-            if (playerDeck.size == 4){
+            if (playerDeck.size == 4) {
                 playCard(card4Image, 3, level)
             } else {
                 //Mostrar error
@@ -346,6 +346,14 @@ class GameActivity : AppCompatActivity() {
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
+        if (!settingBoard) {
+            when (cellContent) {
+                "path" -> cellImageView.setImageResource(R.drawable.path_100x100)
+                "bug" -> cellImageView.setImageResource(R.drawable.bug_100x100)
+                "block" -> cellImageView.setImageResource(R.drawable.bricks_100x100)
+            }
+        }
+
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_100x100)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_100x100)
@@ -353,12 +361,11 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_100x100)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_100x100)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_100x100)
-            "path" -> cellImageView.setImageResource(R.drawable.path_100x100)
-            "bug" -> cellImageView.setImageResource(R.drawable.bug_100x100)
-            "block" -> cellImageView.setImageResource(R.drawable.bricks_100x100)
+
             else -> cellImageView.setImageResource(R.drawable.back_path_100x100)
 
         }
+
 
     }
 
@@ -367,6 +374,15 @@ class GameActivity : AppCompatActivity() {
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
+        if (!settingBoard) {
+            when (cellContent) {
+                "path" -> cellImageView.setImageResource(R.drawable.path_75x75)
+                "bug" -> cellImageView.setImageResource(R.drawable.bug_75x75)
+                "cpu" -> cellImageView.setImageResource(R.drawable.cpu_75x75)
+                "block" -> cellImageView.setImageResource(R.drawable.bricks_75x75)
+
+            }
+        }
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_75x75)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_75x75)
@@ -374,10 +390,6 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_75x75)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_75x75)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_75x75)
-            "path" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.path_75x75)
-            "bug" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.bug_75x75)
-            "cpu" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.cpu_75x75)
-            "block" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.bricks_75x75)
             else -> cellImageView.setImageResource(R.drawable.back_path_75x75)
         }
 
@@ -388,6 +400,15 @@ class GameActivity : AppCompatActivity() {
         cellImageView: ImageView,
         settingBoard: Boolean
     ) {
+        if (!settingBoard) {
+            when (cellContent) {
+                "path" -> cellImageView.setImageResource(R.drawable.path_60x60)
+                "bug" -> cellImageView.setImageResource(R.drawable.bug_60x60)
+                "cpu" -> cellImageView.setImageResource(R.drawable.cpu_60x60)
+                "block" -> cellImageView.setImageResource(R.drawable.bricks_60x60)
+
+            }
+        }
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_60x60)
             "planet02" -> cellImageView.setImageResource(R.drawable.bitrise_02_60x60)
@@ -395,10 +416,6 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_60x60)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_60x60)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_60x60)
-            "path" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.path_60x60)
-            "bug" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.bug_60x60)
-            "cpu" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.cpu_60x60)
-            "block" -> if (!settingBoard) cellImageView.setImageResource(R.drawable.bricks_60x60)
             else -> cellImageView.setImageResource(R.drawable.back_path_60x60)
         }
 
@@ -449,7 +466,7 @@ class GameActivity : AppCompatActivity() {
     private fun playCard(cardImage: ImageView, numCard: Int, level: String?) {
         //cardImage.visibility = View.GONE
         val card = playerDeck[numCard]
-        playerDeck.removeAt(numCard)
+        //playerDeck.removeAt(numCard)
         val characterPosition = character.getPosition()
 
         val characterCell: ImageView =
