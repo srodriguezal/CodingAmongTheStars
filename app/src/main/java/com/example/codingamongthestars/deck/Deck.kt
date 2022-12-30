@@ -21,20 +21,25 @@ class Deck {
             "None"
 
     }
-    fun addCards(cards: Array<String>) {
-        deck.addAll(cards)
 
+    fun isEmpty():Boolean{
+        return deck.isEmpty()
     }
+
+    fun size():Int{
+        return deck.size
+    }
+
 
 }
 
 class DiscardDeck{
     private var discardDeck: MutableList<String> = mutableListOf()
 
-    fun addCards(cards: Array<String>) {
+    fun addCards(cards: Array<String>){
         discardDeck.addAll(cards)
-
     }
+
     fun getLastCard(): String{
         return discardDeck[discardDeck.size-1]
     }

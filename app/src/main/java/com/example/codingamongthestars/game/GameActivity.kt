@@ -14,6 +14,9 @@ import com.example.codingamongthestars.deck.DiscardDeck
 
 class GameActivity : AppCompatActivity() {
     private var matrixBoard: Array<Array<Cell?>> = emptyArray()
+    private var deck: Deck = Deck()
+    private var discardDeck: DiscardDeck = DiscardDeck()
+    private var playerDeck: Array<String> = arrayOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,31 +40,38 @@ class GameActivity : AppCompatActivity() {
         board.removeAllViews()
         setBoard(level, character, board)
 
-        var deck = Deck()
-        var discardDeck = DiscardDeck()
-        val discardDeckImage : ImageView = findViewById(R.id.imgViewDiscardDeck)
+        val discardDeckImage: ImageView = findViewById(R.id.imgViewDiscardDeck)
         val newCardImage: ImageView = findViewById(R.id.imgViewNewCard)
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         val card2Image: ImageView = findViewById(R.id.imgViewCard2)
         val card3Image: ImageView = findViewById(R.id.imgViewCard3)
         val card4Image: ImageView = findViewById(R.id.imgViewCard4)
 
-
-        var playerDeck = setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
+        playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
 
         val trashButton: ImageView = findViewById(R.id.trashButton)
         trashButton.setOnClickListener {
-            discardDeck.addCards(playerDeck)
-            playerDeck = setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
-            val lastCardDiscarded = discardDeck.getLastCard()
-            setImageCard(lastCardDiscarded, discardDeckImage)
+            if (deck.isEmpty()){
+                deck = Deck()
+                discardDeck = DiscardDeck()
+                discardDeckImage.setImageResource(R.drawable.cementary)
+
+            } else{
+                discardDeck.addCards(playerDeck)
+                val lastCardDiscarded = discardDeck.getLastCard()
+                setImageCard(lastCardDiscarded, discardDeckImage)
+
+            }
+            playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
+            println(deck.size())
+
         }
 
         val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
             newCardImage.visibility = View.VISIBLE
-            drawCards(deck, newCardImage)
+            drawNewCard(newCardImage)
         }
 
         val restartButton: ImageView = findViewById(R.id.restartButton)
@@ -70,9 +80,9 @@ class GameActivity : AppCompatActivity() {
             setBoard(level, character, board)
             deck = Deck()
             discardDeck = DiscardDeck()
-            playerDeck = setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
+            playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
             discardDeckImage.setImageResource(R.drawable.cementary)
-            if (newCardImage.visibility == View.VISIBLE){
+            if (newCardImage.visibility == View.VISIBLE) {
                 newCardImage.visibility = View.GONE
             }
         }
@@ -312,25 +322,27 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun setPlayerDeck(
-        deck: Deck, card1: ImageView, card2: ImageView, card3: ImageView,
-        card4: ImageView
+        card1: ImageView, card2: ImageView, card3: ImageView, card4: ImageView
     ): Array<String> {
-       return arrayOf(
-            dealCard(deck, card1),
-            dealCard(deck, card2),
-            dealCard(deck, card3),
-            dealCard(deck, card4)
-        )
-
-
+        return if (!deck.isEmpty()){
+            arrayOf(
+                dealCard(card1),
+                dealCard(card2),
+                dealCard(card3),
+                dealCard(card4)
+            )
+        } else
+            arrayOf()
     }
 
-    private fun dealCard(deck: Deck, cardImage: ImageView): String {
-        val card = deck.dealCard()
-        setImageCard(card, cardImage)
-        return card
-
-
+    private fun dealCard(cardImage: ImageView): String {
+        return if (!deck.isEmpty()){
+            val card = deck.dealCard()
+            setImageCard(card, cardImage)
+            card
+        } else {
+            "deckEmpty"
+        }
     }
 
     private fun setImageCard(card: String, cardImage: ImageView) {
@@ -345,8 +357,8 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawCards(deck: Deck, card: ImageView) {
-        dealCard(deck, card)
+    private fun drawNewCard(card: ImageView) {
+        dealCard(card)
 
     }
 
