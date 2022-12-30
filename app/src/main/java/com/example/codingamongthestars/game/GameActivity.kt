@@ -1,13 +1,5 @@
 package com.example.codingamongthestars.game
 
-//import android.content.ClipData
-//import android.content.ClipDescription
-//import android.graphics.Canvas
-//import android.graphics.Color
-//import android.graphics.Point
-//import android.graphics.drawable.ColorDrawable
-//import android.os.Build
-//import androidx.annotation.RequiresApi
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -23,7 +15,6 @@ var matrix_board : Array<Array<Cell?>> = emptyArray()
 
 class GameActivity : AppCompatActivity() {
 
-    //@RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
@@ -43,38 +34,20 @@ class GameActivity : AppCompatActivity() {
         setBoard(level, character, board)
 
         val deck = Deck()
-        val newCard1Image: ImageView = findViewById(R.id.imgViewNewCard1)
-        val newCard2Image: ImageView = findViewById(R.id.imgViewNewCard2)
+        val newCardImage : ImageView = findViewById(R.id.imgViewNewCard)
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         val card2Image: ImageView = findViewById(R.id.imgViewCard2)
         val card3Image: ImageView = findViewById(R.id.imgViewCard3)
         val card4Image: ImageView = findViewById(R.id.imgViewCard4)
 
-        /* card1Image.apply {
-             setOnLongClickListener { v ->
-                 val item = ClipData.Item(v.tag as? CharSequence)
-                 val dragData = ClipData(
-                     v.tag as? CharSequence,
-                     arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                     item
-                 )
-
-                 val myShadow = MyDragShadowBuilder(this)
-
-                 v.startDragAndDrop(dragData, myShadow, null, 0)
-
-                 true
-             }
-         }*/
 
         setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
 
         val deckRollButton: ImageView = findViewById(R.id.deck_button)
 
         deckRollButton.setOnClickListener {
-            newCard1Image.visibility = View.VISIBLE
-            newCard2Image.visibility = View.VISIBLE
-            drawCards(deck, newCard1Image, newCard2Image)
+            newCardImage.visibility = View.VISIBLE
+            drawCards(deck, newCardImage)
         }
 
 
@@ -271,29 +244,11 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawCards(deck: Deck, card1: ImageView, card2: ImageView) {
-        dealCard(deck, card1)
-        dealCard(deck, card2)
+    private fun drawCards(deck: Deck, card: ImageView) {
+        dealCard(deck, card)
 
     }
 
 
 }
-/*private class MyDragShadowBuilder(v: View) : View.DragShadowBuilder(v) {
-
-    private val shadow = ColorDrawable(Color.LTGRAY)
-    override fun onProvideShadowMetrics(size: Point, touch: Point) {
-        val width: Int = view.width / 2
-        val height: Int = view.height / 2
-        shadow.setBounds(0, 0, width, height)
-        size.set(width, height)
-        touch.set(width / 2, height / 2)
-    }
-    override fun onDrawShadow(canvas: Canvas) {
-        shadow.draw(canvas)
-    }
-}*/
-
-
-class Cell(var image: String) {
-}
+class Cell(var image: String)
