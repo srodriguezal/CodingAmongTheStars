@@ -16,7 +16,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         val easyLevelButton: Button = findViewById(R.id.easyLevelButton)
         val mediumLevelButton: Button = findViewById(R.id.mediumLevelButton)
         val hardLevelButton: Button = findViewById(R.id.hardLevelButton)
-        val backButton: ImageView = findViewById(R.id.back_levels_button)
+        val backButton: ImageView = findViewById(R.id.backLevelsButton)
 
         easyLevelButton.setOnClickListener {
             selectCharacter("easy")

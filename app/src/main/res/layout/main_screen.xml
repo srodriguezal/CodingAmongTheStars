@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.859" />
 
     <ImageView
-        android:id="@+id/helpButton"
+        android:id="@+id/helpMainButton"
         android:contentDescription = "@string/help_button"
         android:layout_width="50dp"
         android:layout_height="50dp"

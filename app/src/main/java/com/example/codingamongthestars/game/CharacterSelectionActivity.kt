@@ -15,9 +15,9 @@ class CharacterSelectionActivity : AppCompatActivity() {
         val bundle = intent.extras
         val level = bundle?.getString("level")
 
-        val kotlinButton: ImageView = findViewById(R.id.kotlin_button)
-        val rubyButton: ImageView = findViewById(R.id.ruby_button)
-        val backButton: ImageView = findViewById(R.id.back_characters_button)
+        val kotlinButton: ImageView = findViewById(R.id.kotlinButton)
+        val rubyButton: ImageView = findViewById(R.id.rubyButton)
+        val backButton: ImageView = findViewById(R.id.backCharactersButton)
 
         kotlinButton.setOnClickListener {
             startGame("kotlin", level)

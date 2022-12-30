@@ -23,7 +23,7 @@ class GameActivity : AppCompatActivity() {
         val level = bundle?.getString("level")
         val character = bundle?.getString("character")
 
-        val backButton: ImageView = findViewById(R.id.back_game_button)
+        val backButton: ImageView = findViewById(R.id.backGameButton)
 
         backButton.setOnClickListener {
             backToSelectCharacter(level)
@@ -43,7 +43,7 @@ class GameActivity : AppCompatActivity() {
 
         setPlayerDeck(deck, card1Image, card2Image, card3Image, card4Image)
 
-        val deckRollButton: ImageView = findViewById(R.id.deck_button)
+        val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
             newCardImage.visibility = View.VISIBLE

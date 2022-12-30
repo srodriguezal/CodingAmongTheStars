@@ -7,18 +7,18 @@
     android:background="@drawable/character_selection_background">
 
     <ImageView
-        android:id="@+id/kotlin_button"
+        android:id="@+id/kotlinButton"
         android:contentDescription="@string/kotlin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ruby_button"
-        app:layout_constraintRight_toLeftOf="@+id/ruby_button"
+        app:layout_constraintBottom_toBottomOf="@+id/rubyButton"
+        app:layout_constraintRight_toLeftOf="@+id/rubyButton"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/kotlin_400x400" />
 
     <ImageView
-        android:id="@+id/ruby_button"
+        android:id="@+id/rubyButton"
         android:contentDescription="@string/ruby_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/ruby_400x400" />
 
     <ImageView
-        android:id="@+id/back_characters_button"
+        android:id="@+id/backCharactersButton"
         android:contentDescription="@string/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

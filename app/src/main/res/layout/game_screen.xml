@@ -7,7 +7,7 @@
     android:background="@drawable/board_background">
 
     <ImageView
-        android:id="@+id/deck_button"
+        android:id="@+id/deckButton"
         android:layout_width="76dp"
         android:layout_height="111dp"
         android:contentDescription="@string/deck"
@@ -20,12 +20,44 @@
         app:srcCompat="@drawable/card_back" />
 
     <ImageView
-        android:id="@+id/back_game_button"
-        android:contentDescription="@string/back_button"
+        android:id="@+id/trashButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/helpGameButton"
+        app:layout_constraintEnd_toStartOf="@+id/helpGameButton"
+        app:layout_constraintTop_toTopOf="@+id/helpGameButton"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/trash_button" />
+
+    <ImageView
+        android:id="@+id/restartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/trashButton"
+        app:layout_constraintEnd_toStartOf="@+id/trashButton"
+        app:layout_constraintTop_toTopOf="@+id/trashButton"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/restart_button" />
+
+    <ImageView
+        android:id="@+id/helpGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/help_button" />
+
+    <ImageView
+        android:id="@+id/backGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_arrow" />
@@ -37,11 +69,11 @@
         android:layout_marginStart="24dp"
         android:contentDescription="@string/card"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/deck_button"
+        app:layout_constraintBottom_toBottomOf="@+id/deckButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toEndOf="@+id/deck_button"
-        app:layout_constraintTop_toTopOf="@+id/deck_button"
+        app:layout_constraintStart_toEndOf="@+id/deckButton"
+        app:layout_constraintTop_toTopOf="@+id/deckButton"
         app:srcCompat="@drawable/card_back" />
 
     <ImageView
@@ -97,7 +129,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"
-        app:layout_constraintStart_toEndOf="@+id/deck_button"
+        app:layout_constraintStart_toEndOf="@+id/deckButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/cementary"
