@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_screen)
 
-        val startButton: Button = findViewById(R.id.start_button)
+        val startButton: Button = findViewById(R.id.startButton)
 
         startButton.setOnClickListener {
             startGame()
