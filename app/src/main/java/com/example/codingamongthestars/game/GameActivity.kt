@@ -20,6 +20,7 @@ class GameActivity : AppCompatActivity() {
     private var playerDeck: MutableList<String> = mutableListOf()
     private var character: MainCharacter = MainCharacter()
     private var numMaxCellsInRow: Int = 0
+    private var lives: Int = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,8 @@ class GameActivity : AppCompatActivity() {
         val level = bundle?.getString("level")
         val characterName = bundle?.getString("character")
         character.setName(characterName)
+
+        val livesImage: ImageView = findViewById(R.id.livesCounter)
 
         val backButton: ImageView = findViewById(R.id.backGameButton)
         backButton.setOnClickListener {
@@ -546,12 +549,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun moveXCharacter(x: Int, characterPosition: Array<Int>, level: String?) {
-        val move = characterPosition[0] + x
+        val move = characterPosition[1] + x
         if (move < numMaxCellsInRow) {
-            val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
-            matrixBoard[move][characterPosition[1]] = newCell
+            val newCell = Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
+            matrixBoard[characterPosition[0]][move] = newCell
             val oldCell = Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
             matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+            character.setPosition(characterPosition[0], move)
 
         } else {
             //mostrar error
@@ -560,9 +564,9 @@ class GameActivity : AppCompatActivity() {
         when (level) {
             "easy" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
+                    findViewById(matrixBoard[characterPosition[0]][move].id)
                 showCellEasyLevel(
-                    matrixBoard[move][characterPosition[1]].image,
+                    matrixBoard[characterPosition[0]][move].image,
                     imageNewCell,
                     false
                 )
@@ -577,9 +581,9 @@ class GameActivity : AppCompatActivity() {
             }
             "medium" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
+                    findViewById(matrixBoard[characterPosition[0]][move].id)
                 showCellMediumLevel(
-                    matrixBoard[move][characterPosition[1]].image,
+                    matrixBoard[characterPosition[0]][move].image,
                     imageNewCell,
                     false
                 )
@@ -595,9 +599,9 @@ class GameActivity : AppCompatActivity() {
             }
             "hard" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
+                    findViewById(matrixBoard[characterPosition[0]][move].id)
                 showCellHardLevel(
-                    matrixBoard[move][characterPosition[1]].image,
+                    matrixBoard[characterPosition[0]][move].image,
                     imageNewCell,
                     false
                 )
@@ -615,12 +619,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun moveYCharacter(y: Int, characterPosition: Array<Int>, level: String?) {
-        val move = characterPosition[1] + y
+        val move = characterPosition[0] + y
         if (move < numMaxCellsInRow) {
-            val newCell = Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
-            matrixBoard[characterPosition[0]][move] = newCell
+            val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
+            matrixBoard[move][characterPosition[1]] = newCell
             val oldCell = Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
             matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+            character.setPosition(move, characterPosition[1])
 
         } else {
             //mostrar error
@@ -628,9 +633,9 @@ class GameActivity : AppCompatActivity() {
         when (level) {
             "easy" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
+                    findViewById(matrixBoard[move][characterPosition[1]].id)
                 showCellEasyLevel(
-                    matrixBoard[characterPosition[0]][move].image,
+                    matrixBoard[move][characterPosition[1]].image,
                     imageNewCell,
                     false
                 )
@@ -645,9 +650,9 @@ class GameActivity : AppCompatActivity() {
             }
             "medium" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
+                    findViewById(matrixBoard[move][characterPosition[1]].id)
                 showCellMediumLevel(
-                    matrixBoard[characterPosition[0]][move].image,
+                    matrixBoard[move][characterPosition[1]].image,
                     imageNewCell,
                     false
                 )
@@ -663,9 +668,9 @@ class GameActivity : AppCompatActivity() {
             }
             "hard" -> {
                 val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
+                    findViewById(matrixBoard[move][characterPosition[1]].id)
                 showCellHardLevel(
-                    matrixBoard[characterPosition[0]][move].image,
+                    matrixBoard[move][characterPosition[1]].image,
                     imageNewCell,
                     false
                 )

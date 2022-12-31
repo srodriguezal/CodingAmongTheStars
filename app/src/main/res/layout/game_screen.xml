@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/board_background">
 
     <ImageView
-        android:id="@+id/deckButton"
+        android:id="@+id/backGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/deck"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482"
-        app:srcCompat="@drawable/card_back" />
+        app:srcCompat="@drawable/back_arrow" />
 
     <ImageView
         android:id="@+id/trashButton"
@@ -52,15 +49,28 @@
         app:srcCompat="@drawable/help_button" />
 
     <ImageView
-        android:id="@+id/backGameButton"
+        android:id="@+id/livesCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="35dp"
-        android:contentDescription="@string/back_button"
+        app:layout_constraintStart_toEndOf="@id/backGameButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/life_three" />
+
+
+    <ImageView
+        android:id="@+id/deckButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/deck"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_arrow" />
+        app:layout_constraintVertical_bias="0.482"
+        app:srcCompat="@drawable/card_back" />
 
     <ImageView
         android:id="@+id/imgViewNewCard"

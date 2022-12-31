@@ -2,20 +2,20 @@ package com.example.codingamongthestars.mainCharacter
 
 class MainCharacter{
     private var name: String? = null
-    private var positionX: Int = 0
-    private var positionY: Int = 0
+    private var positionRow: Int = 0
+    private var positionCol: Int = 0
     var orientation: String = ""
 
     fun setStartPosition(numCells: Int){
-        positionX = numCells-1
-        positionY = 0
+        positionRow = numCells-1
+        positionCol = 0
         orientation = "up"
 
     }
 
-    fun setPosition(newX: Int, newY: Int){
-        positionX = newX
-        positionY = newY
+    fun setPosition(newRow: Int, newCol: Int){
+        positionRow = newRow
+        positionCol = newCol
     }
 
     fun setName(newName: String?){
@@ -23,7 +23,7 @@ class MainCharacter{
     }
 
     fun getPosition(): Array<Int>{
-        return arrayOf(positionX, positionY)
+        return arrayOf(positionRow, positionCol)
     }
 
     fun getName(): String?{
