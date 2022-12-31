@@ -1,7 +1,7 @@
 package com.example.codingamongthestars.mainCharacter
 
 class MainCharacter{
-    private var name: String? = null
+    private var name: String = ""
     private var positionRow: Int = 0
     private var positionCol: Int = 0
     var orientation: String = ""
@@ -18,7 +18,7 @@ class MainCharacter{
         positionCol = newCol
     }
 
-    fun setName(newName: String?){
+    fun setName(newName: String){
         name = newName
     }
 
@@ -26,7 +26,7 @@ class MainCharacter{
         return arrayOf(positionRow, positionCol)
     }
 
-    fun getName(): String?{
+    fun getName(): String{
         return name
     }
 
