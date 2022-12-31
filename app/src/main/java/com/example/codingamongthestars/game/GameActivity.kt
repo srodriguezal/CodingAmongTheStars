@@ -143,7 +143,7 @@ class GameActivity : AppCompatActivity() {
         when (lives) {
             3 -> livesImage.setImageResource(R.drawable.life_three)
             2 -> livesImage.setImageResource(R.drawable.life_two)
-            1 -> livesImage.setImageResource(R.drawable.life_three)
+            1 -> livesImage.setImageResource(R.drawable.life_one)
         }
     }
 
@@ -516,7 +516,7 @@ class GameActivity : AppCompatActivity() {
             }
 
             drawPath(pathCell)
-            
+
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
@@ -537,7 +537,7 @@ class GameActivity : AppCompatActivity() {
         characterPosition: Array<Int>,
         targetCell: Cell
     ) {
-        lives--
+        lives -= 1
         setLivesImage()
         checkIfUserLost()
 
@@ -557,14 +557,13 @@ class GameActivity : AppCompatActivity() {
         characterPosition: Array<Int>,
         targetCell: Cell
     ) {
-        lives--
+        lives -= 1
         setLivesImage()
         checkIfUserLost()
-        val newX = (0 until numMaxCellsInRow).random()
-        val newY = (0 until numMaxCellsInRow).random()
+        val newPosition = findNewPosition()
 
-        val newCell = Cell(character.getName(), matrixBoard[newX][newY].id)
-        matrixBoard[newX][newY] = newCell
+        val newCell = Cell(character.getName(), matrixBoard[newPosition[0]][newPosition[1]].id)
+        matrixBoard[newPosition[0]][newPosition[1]] = newCell
 
         val oldCell =
             Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
@@ -572,7 +571,26 @@ class GameActivity : AppCompatActivity() {
 
         val bugCell: ImageView = findViewById(targetCell.id)
         drawBug(bugCell)
-        character.setPosition(newX, newY)
+        character.setPosition(newPosition[0], newPosition[1])
+    }
+
+    private fun findNewPosition(): Array<Int>{
+        val newX = (0 until numMaxCellsInRow).random()
+        val newY = (0 until numMaxCellsInRow).random()
+        val newPosition = arrayOf(newX, newY)
+
+
+        val planetPositions = arrayOf(
+            arrayOf((numMaxCellsInRow/2)-1, (numMaxCellsInRow/2)-1),
+            arrayOf((numMaxCellsInRow/2-1), numMaxCellsInRow/2),
+            arrayOf(numMaxCellsInRow/2, (numMaxCellsInRow/2)-1),
+            arrayOf(numMaxCellsInRow/2, numMaxCellsInRow/2)
+        )
+        return if (!planetPositions.contains(newPosition)){
+            newPosition
+        } else {
+            findNewPosition()
+        }
     }
 
     private fun drawRightCharacter(characterCell: ImageView) {
