@@ -41,6 +41,16 @@
             android:screenOrientation="landscape"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.example.codingamongthestars.game.WinGameActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.codingamongthestars.game.LostGameActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

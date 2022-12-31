@@ -32,8 +32,7 @@ class GameActivity : AppCompatActivity() {
         level = bundle?.getString("level")
         characterName = bundle?.getString("character")
         characterName?.let { character.setName(it) }
-
-        val livesImage: ImageView = findViewById(R.id.livesCounter)
+        setLivesImage()
 
         val backButton: ImageView = findViewById(R.id.backGameButton)
         backButton.setOnClickListener {
@@ -126,6 +125,8 @@ class GameActivity : AppCompatActivity() {
             if (newCardImage.visibility == View.VISIBLE) {
                 newCardImage.visibility = View.GONE
             }
+            lives = 3
+            setLivesImage()
         }
 
 
@@ -135,6 +136,15 @@ class GameActivity : AppCompatActivity() {
         val backIntent = Intent(this, CharacterSelectionActivity::class.java)
         backIntent.putExtra("level", level)
         startActivity(backIntent)
+    }
+
+    private fun setLivesImage() {
+        val livesImage: ImageView = findViewById(R.id.livesCounter)
+        when (lives) {
+            3 -> livesImage.setImageResource(R.drawable.life_three)
+            2 -> livesImage.setImageResource(R.drawable.life_two)
+            1 -> livesImage.setImageResource(R.drawable.life_three)
+        }
     }
 
     private fun setBoard(characterName: String?, board: TableLayout) {
@@ -266,13 +276,13 @@ class GameActivity : AppCompatActivity() {
                 matrixBoard[i][j].id = cell.id
                 when (level) {
                     "easy" -> {
-                        showCellEasyLevel(matrixBoard[i][j].image, cell, true)
+                        drawEasyBoard(matrixBoard[i][j].image, cell)
                     }
                     "medium" -> {
-                        showCellMediumLevel(matrixBoard[i][j].image, cell, true)
+                        drawMediumBoard(matrixBoard[i][j].image, cell)
                     }
                     "hard" -> {
-                        showCellHardLevel(matrixBoard[i][j].image, cell, true)
+                        drawHardBoard(matrixBoard[i][j].image, cell)
                     }
 
                 }
@@ -284,10 +294,9 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun showCellEasyLevel(
+    private fun drawEasyBoard(
         cellContent: String?,
-        cellImageView: ImageView,
-        settingBoard: Boolean
+        cellImageView: ImageView
     ) {
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_100x100)
@@ -296,31 +305,15 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_100x100)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_100x100)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_100x100)
-            "path" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.path_100x100)
-                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
-            }
-            "bug" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bug_100x100)
-                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
-            }
-            "block" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bricks_100x100)
-                } else cellImageView.setImageResource(R.drawable.back_path_100x100)
-            }
-
+            else -> cellImageView.setImageResource(R.drawable.back_path_100x100)
         }
-
 
     }
 
-    private fun showCellMediumLevel(
+
+    private fun drawMediumBoard(
         cellContent: String?,
-        cellImageView: ImageView,
-        settingBoard: Boolean
+        cellImageView: ImageView
     ) {
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_75x75)
@@ -329,43 +322,15 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_75x75)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_75x75)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_75x75)
-            "path" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.path_75x75)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_75x75)
-                }
-            }
-            "bug" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bug_75x75)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_75x75)
-                }
-            }
-            "cpu" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.cpu_75x75)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_75x75)
-                }
-            }
-            "block" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bricks_75x75)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_75x75)
-                }
-            }
+            else -> cellImageView.setImageResource(R.drawable.back_path_75x75)
 
         }
 
     }
 
-    private fun showCellHardLevel(
+    private fun drawHardBoard(
         cellContent: String?,
-        cellImageView: ImageView,
-        settingBoard: Boolean
+        cellImageView: ImageView
     ) {
         when (cellContent) {
             "planet01" -> cellImageView.setImageResource(R.drawable.bitrise_01_60x60)
@@ -374,39 +339,11 @@ class GameActivity : AppCompatActivity() {
             "planet04" -> cellImageView.setImageResource(R.drawable.bitrise_04_60x60)
             "kotlin" -> cellImageView.setImageResource(R.drawable.kotlin_60x60)
             "ruby" -> cellImageView.setImageResource(R.drawable.ruby_60x60)
-            "path" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.path_60x60)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_60x60)
-                }
-            }
-            "bug" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bug_60x60)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_60x60)
-                }
-            }
-            "cpu" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.cpu_60x60)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_60x60)
-                }
-            }
-            "block" -> {
-                if (!settingBoard) {
-                    cellImageView.setImageResource(R.drawable.bricks_60x60)
-                } else {
-                    cellImageView.setImageResource(R.drawable.back_path_60x60)
-                }
-            }
+            else -> cellImageView.setImageResource(R.drawable.back_path_60x60)
 
         }
 
     }
-
 
     private fun setPlayerDeck(
         card1: ImageView, card2: ImageView, card3: ImageView, card4: ImageView
@@ -509,46 +446,34 @@ class GameActivity : AppCompatActivity() {
 
             val targetCell: Cell = matrixBoard[characterPosition[0]][move]
 
-            if (targetCell.image.contains("planet")){
+            when (targetCell.image) {
+                "bug" -> {
+                    findBugCell(characterPosition, targetCell)
 
-                val newCell =
-                    Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
-                matrixBoard[characterPosition[0]][move] = newCell
-
-                val oldCell =
-                    Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-                character.setPosition(characterPosition[0], move)
-
-                winGame()
-            } else {
-
-                when (targetCell.image) {
-                    "path" -> {
-                        val newCell =
-                            Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
-                        matrixBoard[characterPosition[0]][move] = newCell
-
-                        val oldCell =
-                            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                        val pathCell: ImageView = findViewById(oldCell.id)
-                        drawPath(pathCell)
-                        character.setPosition(characterPosition[0], move)
-
-                    }
-                    "bug" -> {
-                        findBugCell(characterPosition, targetCell)
-
-                    }
-                    "cpu" -> {
-                        findCPUCell(characterPosition, targetCell)
-                    }
-                    "block" ->{
-                        findBlockCell(targetCell)
-                    }
                 }
+                "cpu" -> {
+                    findCPUCell(characterPosition, targetCell)
+                }
+                "block" -> {
+                    findBlockCell(targetCell)
+                }
+                else -> {
+                    val newCell =
+                        Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
+                    matrixBoard[characterPosition[0]][move] = newCell
+
+                    val oldCell =
+                        Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+                    matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+
+                    val pathCell: ImageView = findViewById(oldCell.id)
+                    drawPath(pathCell)
+                    character.setPosition(characterPosition[0], move)
+
+                }
+            }
+            if (targetCell.image.contains("planet")) {
+                winGame()
             }
         } else {
             //mostrar error
@@ -563,53 +488,34 @@ class GameActivity : AppCompatActivity() {
 
             val targetCell: Cell = matrixBoard[move][characterPosition[1]]
 
-            if (targetCell.image.contains("planet")){
-                val newCell =
-                    Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
-                matrixBoard[move][characterPosition[1]] = newCell
+            when (targetCell.image) {
+                "bug" -> {
+                    findBugCell(characterPosition, targetCell)
 
-                val oldCell =
-                    Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-                character.setPosition(move, characterPosition[1])
+                }
+                "cpu" -> {
+                    findCPUCell(characterPosition, targetCell)
+                }
+                "block" -> {
+                    findBlockCell(targetCell)
+                }
+                else -> {
+                    val newCell =
+                        Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
+                    matrixBoard[move][characterPosition[1]] = newCell
 
-                winGame()
-            } else {
+                    val oldCell =
+                        Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+                    matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
 
-                when (targetCell.image) {
-                    "path" -> {
-                        val newCell =
-                            Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
-                        matrixBoard[move][characterPosition[1]] = newCell
-
-                        val oldCell =
-                            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                        val pathCell: ImageView = findViewById(oldCell.id)
-                        drawPath(pathCell)
-                        character.setPosition(move, characterPosition[1])
-
-                    }
-                    "bug" -> {
-                        findBugCell(characterPosition, targetCell)
-
-                    }
-                    "cpu" -> {
-                        findCPUCell(characterPosition, targetCell)
-                    }
-                    "block" ->{
-                        findBlockCell(targetCell)
-                    }
+                    val pathCell: ImageView = findViewById(oldCell.id)
+                    drawPath(pathCell)
+                    character.setPosition(move, characterPosition[1])
                 }
             }
-
-            /*val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
-            matrixBoard[move][characterPosition[1]] = newCell
-            val oldCell = Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-            matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-            character.setPosition(move, characterPosition[1])*/
-
+            if (targetCell.image.contains("planet")) {
+                winGame()
+            }
         } else {
             //mostrar error
         }
@@ -628,6 +534,7 @@ class GameActivity : AppCompatActivity() {
         targetCell: Cell
     ) {
         lives--
+        setLivesImage()
         checkIfUserLost()
 
         val newCell =
@@ -647,6 +554,7 @@ class GameActivity : AppCompatActivity() {
         targetCell: Cell
     ) {
         lives--
+        setLivesImage()
         checkIfUserLost()
         val newX = (0 until numMaxCellsInRow).random()
         val newY = (0 until numMaxCellsInRow).random()
@@ -735,7 +643,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawPath(imageCell: ImageView){
+    private fun drawPath(imageCell: ImageView) {
         when (level) {
             "easy" -> imageCell.setImageResource(R.drawable.path_100x100)
             "medium" -> imageCell.setImageResource(R.drawable.path_75x75)
@@ -744,7 +652,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawBlock(imageCell: ImageView){
+    private fun drawBlock(imageCell: ImageView) {
         when (level) {
             "easy" -> imageCell.setImageResource(R.drawable.bricks_100x100)
             "medium" -> imageCell.setImageResource(R.drawable.bricks_75x75)
@@ -753,7 +661,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawBug(imageCell: ImageView){
+    private fun drawBug(imageCell: ImageView) {
         when (level) {
             "easy" -> imageCell.setImageResource(R.drawable.bug_100x100)
             "medium" -> imageCell.setImageResource(R.drawable.bug_75x75)
@@ -762,7 +670,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawCPU(imageCell: ImageView){
+    private fun drawCPU(imageCell: ImageView) {
         when (level) {
             "medium" -> imageCell.setImageResource(R.drawable.cpu_75x75)
             "hard" -> imageCell.setImageResource(R.drawable.cpu_60x60)
@@ -770,8 +678,8 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun checkIfUserLost(){
-        if (lives == 0){
+    private fun checkIfUserLost() {
+        if (lives == 0) {
             val failIntent = Intent(this, LostGameActivity::class.java)
             failIntent.putExtra("level", level)
             failIntent.putExtra("character", characterName)
@@ -779,7 +687,8 @@ class GameActivity : AppCompatActivity() {
 
         }
     }
-    private fun winGame(){
+
+    private fun winGame() {
         val winIntent = Intent(this, WinGameActivity::class.java)
         startActivity(winIntent)
 
