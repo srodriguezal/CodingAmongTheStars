@@ -539,47 +539,17 @@ class GameActivity : AppCompatActivity() {
 
                     }
                     "bug" -> {
-                        lives--
-                        checkIfUserLost()
-                        val newX = (0 until numMaxCellsInRow).random()
-                        val newY = (0 until numMaxCellsInRow).random()
-
-                        val newCell = Cell(character.getName(), matrixBoard[newX][newY].id)
-                        matrixBoard[newX][newY] = newCell
-
-                        val oldCell =
-                            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                        val bugCell: ImageView = findViewById(targetCell.id)
-                        drawBug(bugCell)
-                        character.setPosition(newX, newY)
+                        findBugCell(characterPosition, targetCell)
 
                     }
                     "cpu" -> {
-                        lives--
-                        checkIfUserLost()
-
-                        val newCell =
-                            Cell(character.getName(), matrixBoard[numMaxCellsInRow - 1][0].id)
-                        matrixBoard[numMaxCellsInRow - 1][0] = newCell
-                        val oldCell =
-                            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
-                        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                        val cpuCell: ImageView = findViewById(targetCell.id)
-                        drawCPU(cpuCell)
-                        character.setPosition(numMaxCellsInRow - 1, 0)
+                        findCPUCell(characterPosition, targetCell)
                     }
                     "block" ->{
-                        val blockCell: ImageView = findViewById(targetCell.id)
-                        drawBlock(blockCell)
+                        findBlockCell(targetCell)
                     }
                 }
             }
-
-
-
         } else {
             //mostrar error
         }
@@ -593,11 +563,52 @@ class GameActivity : AppCompatActivity() {
 
             val targetCell: Cell = matrixBoard[move][characterPosition[1]]
 
-            val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
+            if (targetCell.image.contains("planet")){
+                val newCell =
+                    Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
+                matrixBoard[move][characterPosition[1]] = newCell
+
+                val oldCell =
+                    Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+                matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+                character.setPosition(move, characterPosition[1])
+
+                winGame()
+            } else {
+
+                when (targetCell.image) {
+                    "path" -> {
+                        val newCell =
+                            Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
+                        matrixBoard[move][characterPosition[1]] = newCell
+
+                        val oldCell =
+                            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+                        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+
+                        val pathCell: ImageView = findViewById(oldCell.id)
+                        drawPath(pathCell)
+                        character.setPosition(move, characterPosition[1])
+
+                    }
+                    "bug" -> {
+                        findBugCell(characterPosition, targetCell)
+
+                    }
+                    "cpu" -> {
+                        findCPUCell(characterPosition, targetCell)
+                    }
+                    "block" ->{
+                        findBlockCell(targetCell)
+                    }
+                }
+            }
+
+            /*val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
             matrixBoard[move][characterPosition[1]] = newCell
             val oldCell = Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
             matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-            character.setPosition(move, characterPosition[1])
+            character.setPosition(move, characterPosition[1])*/
 
         } else {
             //mostrar error
@@ -605,6 +616,51 @@ class GameActivity : AppCompatActivity() {
 
         val newPosition = character.getPosition()
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
+    }
+
+    private fun findBlockCell(targetCell: Cell) {
+        val blockCell: ImageView = findViewById(targetCell.id)
+        drawBlock(blockCell)
+    }
+
+    private fun findCPUCell(
+        characterPosition: Array<Int>,
+        targetCell: Cell
+    ) {
+        lives--
+        checkIfUserLost()
+
+        val newCell =
+            Cell(character.getName(), matrixBoard[numMaxCellsInRow - 1][0].id)
+        matrixBoard[numMaxCellsInRow - 1][0] = newCell
+        val oldCell =
+            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+
+        val cpuCell: ImageView = findViewById(targetCell.id)
+        drawCPU(cpuCell)
+        character.setPosition(numMaxCellsInRow - 1, 0)
+    }
+
+    private fun findBugCell(
+        characterPosition: Array<Int>,
+        targetCell: Cell
+    ) {
+        lives--
+        checkIfUserLost()
+        val newX = (0 until numMaxCellsInRow).random()
+        val newY = (0 until numMaxCellsInRow).random()
+
+        val newCell = Cell(character.getName(), matrixBoard[newX][newY].id)
+        matrixBoard[newX][newY] = newCell
+
+        val oldCell =
+            Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
+        matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
+
+        val bugCell: ImageView = findViewById(targetCell.id)
+        drawBug(bugCell)
+        character.setPosition(newX, newY)
     }
 
     private fun drawRightCharacter(characterCell: ImageView) {
