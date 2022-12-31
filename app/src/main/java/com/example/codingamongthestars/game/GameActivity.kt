@@ -574,22 +574,18 @@ class GameActivity : AppCompatActivity() {
         character.setPosition(newPosition[0], newPosition[1])
     }
 
-    private fun findNewPosition(): Array<Int>{
+    private fun findNewPosition(): Array<Int> {
         val newX = (0 until numMaxCellsInRow).random()
         val newY = (0 until numMaxCellsInRow).random()
         val newPosition = arrayOf(newX, newY)
 
-
-        val planetPositions = arrayOf(
-            arrayOf((numMaxCellsInRow/2)-1, (numMaxCellsInRow/2)-1),
-            arrayOf((numMaxCellsInRow/2-1), numMaxCellsInRow/2),
-            arrayOf(numMaxCellsInRow/2, (numMaxCellsInRow/2)-1),
-            arrayOf(numMaxCellsInRow/2, numMaxCellsInRow/2)
-        )
-        return if (!planetPositions.contains(newPosition)){
-            newPosition
-        } else {
+        return if ((newX == ((numMaxCellsInRow / 2) - 1) && (newY == (numMaxCellsInRow / 2) - 1)) ||
+            ((newX == (numMaxCellsInRow / 2 - 1)) && newY == numMaxCellsInRow / 2) ||
+            (newX == numMaxCellsInRow / 2 && newY == ((numMaxCellsInRow / 2) - 1)) ||
+            (newX == numMaxCellsInRow / 2 && newY == numMaxCellsInRow / 2)) {
             findNewPosition()
+        } else {
+            newPosition
         }
     }
 
