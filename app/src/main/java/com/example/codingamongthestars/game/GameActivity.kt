@@ -496,7 +496,7 @@ class GameActivity : AppCompatActivity() {
                 drawDownCharacter(characterCell)
             }
             "up" -> {
-                character.orientation = "down"
+                character.orientation = "up"
                 drawUpCharacter(characterCell)
             }
         }
