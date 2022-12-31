@@ -90,7 +90,7 @@ class GameActivity : AppCompatActivity() {
             if (deck.isEmpty()) {
                 deck = Deck()
                 discardDeck = DiscardDeck()
-                discardDeckImage.setImageResource(R.drawable.cementary)
+                discardDeckImage.setImageResource(R.drawable.discard_deck)
 
             } else {
                 discardDeck.addCards(playerDeck)
@@ -117,7 +117,7 @@ class GameActivity : AppCompatActivity() {
             deck = Deck()
             discardDeck = DiscardDeck()
             playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
-            discardDeckImage.setImageResource(R.drawable.cementary)
+            discardDeckImage.setImageResource(R.drawable.discard_deck)
             if (newCardImage.visibility == View.VISIBLE) {
                 newCardImage.visibility = View.GONE
             }
