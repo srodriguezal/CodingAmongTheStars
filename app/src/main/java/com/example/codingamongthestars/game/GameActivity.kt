@@ -445,6 +445,8 @@ class GameActivity : AppCompatActivity() {
         if (move < numMaxCellsInRow) {
 
             val targetCell: Cell = matrixBoard[characterPosition[0]][move]
+            val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
+            val pathCell: ImageView = findViewById(currentCell.id)
 
             when (targetCell.image) {
                 "bug" -> {
@@ -465,13 +467,13 @@ class GameActivity : AppCompatActivity() {
                     val oldCell =
                         Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
                     matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                    val pathCell: ImageView = findViewById(oldCell.id)
-                    drawPath(pathCell)
                     character.setPosition(characterPosition[0], move)
 
                 }
             }
+
+            drawPath(pathCell)
+
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
@@ -487,6 +489,8 @@ class GameActivity : AppCompatActivity() {
         if (move < numMaxCellsInRow) {
 
             val targetCell: Cell = matrixBoard[move][characterPosition[1]]
+            val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
+            val pathCell: ImageView = findViewById(currentCell.id)
 
             when (targetCell.image) {
                 "bug" -> {
@@ -507,12 +511,12 @@ class GameActivity : AppCompatActivity() {
                     val oldCell =
                         Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
                     matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
-
-                    val pathCell: ImageView = findViewById(oldCell.id)
-                    drawPath(pathCell)
                     character.setPosition(move, characterPosition[1])
                 }
             }
+
+            drawPath(pathCell)
+            
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
