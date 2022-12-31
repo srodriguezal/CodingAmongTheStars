@@ -21,13 +21,14 @@ class GameActivity : AppCompatActivity() {
     private var character: MainCharacter = MainCharacter()
     private var numMaxCellsInRow: Int = 0
     private var lives: Int = 3
+    private var level: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
         val bundle = intent.extras
-        val level = bundle?.getString("level")
+        level = bundle?.getString("level")
         val characterName = bundle?.getString("character")
         character.setName(characterName)
 
@@ -35,7 +36,7 @@ class GameActivity : AppCompatActivity() {
 
         val backButton: ImageView = findViewById(R.id.backGameButton)
         backButton.setOnClickListener {
-            backToSelectCharacter(level)
+            backToSelectCharacter()
         }
 
         val helpButton: ImageView = findViewById(R.id.helpGameButton)
@@ -45,14 +46,14 @@ class GameActivity : AppCompatActivity() {
 
         val board: TableLayout = findViewById(R.id.gameTableLayout)
         board.removeAllViews()
-        setBoard(level, characterName, board)
+        setBoard(characterName, board)
 
         val discardDeckImage: ImageView = findViewById(R.id.imgViewDiscardDeck)
         val newCardImage: ImageView = findViewById(R.id.imgViewNewCard)
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         card1Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card1Image, 0, level)
+                playCard(card1Image, 0)
             } else {
                 //Mostrar error
             }
@@ -62,7 +63,7 @@ class GameActivity : AppCompatActivity() {
         val card2Image: ImageView = findViewById(R.id.imgViewCard2)
         card2Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card2Image, 1, level)
+                playCard(card2Image, 1)
             } else {
                 //Mostrar error
             }
@@ -71,7 +72,7 @@ class GameActivity : AppCompatActivity() {
         val card3Image: ImageView = findViewById(R.id.imgViewCard3)
         card3Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card3Image, 2, level)
+                playCard(card3Image, 2)
             } else {
                 //Mostrar error
             }
@@ -80,7 +81,7 @@ class GameActivity : AppCompatActivity() {
         val card4Image: ImageView = findViewById(R.id.imgViewCard4)
         card4Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card4Image, 3, level)
+                playCard(card4Image, 3)
             } else {
                 //Mostrar error
             }
@@ -116,7 +117,7 @@ class GameActivity : AppCompatActivity() {
         val restartButton: ImageView = findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
             board.removeAllViews()
-            setBoard(level, characterName, board)
+            setBoard(characterName, board)
             deck = Deck()
             discardDeck = DiscardDeck()
             playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
@@ -129,33 +130,33 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun backToSelectCharacter(level: String?) {
+    private fun backToSelectCharacter() {
         val backIntent = Intent(this, CharacterSelectionActivity::class.java)
         backIntent.putExtra("level", level)
         startActivity(backIntent)
     }
 
-    private fun setBoard(level: String?, characterName: String?, board: TableLayout) {
+    private fun setBoard(characterName: String?, board: TableLayout) {
         when (level) {
             "easy" -> {
                 numMaxCellsInRow = 4
                 character.setStartPosition(numMaxCellsInRow)
                 createMatrix(characterName, numMaxCellsInRow, 4, 1, 0)
-                createVisualBoard(board, numMaxCellsInRow, level)
+                createVisualBoard(board, numMaxCellsInRow)
 
             }
             "medium" -> {
                 numMaxCellsInRow = 6
                 character.setStartPosition(numMaxCellsInRow)
                 createMatrix(characterName, numMaxCellsInRow, 6, 2, 1)
-                createVisualBoard(board, numMaxCellsInRow, level)
+                createVisualBoard(board, numMaxCellsInRow)
 
             }
             "hard" -> {
                 numMaxCellsInRow = 8
                 character.setStartPosition(numMaxCellsInRow)
                 createMatrix(characterName, numMaxCellsInRow, 18, 4, 2)
-                createVisualBoard(board, numMaxCellsInRow, level)
+                createVisualBoard(board, numMaxCellsInRow)
 
             }
         }
@@ -253,7 +254,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun createVisualBoard(board: TableLayout, maxCells: Int, level: String?) {
+    private fun createVisualBoard(board: TableLayout, maxCells: Int) {
         var cellId = 0
         for (i in (0 until maxCells)) {
             val row = TableRow(this)
@@ -448,107 +449,60 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun playCard(cardImage: ImageView, numCard: Int, level: String?) {
+    private fun playCard(cardImage: ImageView, numCard: Int) {
         //cardImage.visibility = View.GONE
         val card = playerDeck[numCard]
         //playerDeck.removeAt(numCard)
         val characterPosition = character.getPosition()
-
         val characterCell: ImageView =
             findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
+
         when (card) {
             "goForward" -> {
                 when (character.orientation) {
                     "right" -> {
-                        moveXCharacter(1, characterPosition, level)
+                        val newPositionXRight = moveXCharacter(1, characterPosition)
+                        drawRightCharacter(newPositionXRight)
 
                     }
                     "left" -> {
-                        moveXCharacter(-1, characterPosition, level)
+                        val newPositionXLeft = moveXCharacter(-1, characterPosition)
+                        drawLeftCharacter(newPositionXLeft)
+
                     }
                     "up" -> {
-                        moveYCharacter(-1, characterPosition, level)
+                        val newPositionYUp = moveYCharacter(-1, characterPosition)
+                        drawUpCharacter(newPositionYUp)
                     }
                     "down" -> {
-                        moveYCharacter(1, characterPosition, level)
+                        val newPositionYDown = moveYCharacter(1, characterPosition)
+                        drawDownCharacter(newPositionYDown)
                     }
                 }
 
             }
             "right" -> {
                 character.orientation = "right"
-                if (character.getName() == "kotlin") {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_right_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_right_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_right_60x60)
-                    }
-
-                } else {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.ruby_right_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.ruby_right_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.ruby_right_60x60)
-                    }
-                }
+                drawRightCharacter(characterCell)
 
             }
             "left" -> {
                 character.orientation = "left"
-                if (character.getName() == "kotlin") {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_left_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_left_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_left_60x60)
-                    }
-
-                } else {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.ruby_left_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.ruby_left_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.ruby_left_60x60)
-                    }
-                }
+                drawLeftCharacter(characterCell)
 
             }
             "down" -> {
                 character.orientation = "down"
-                if (character.getName() == "kotlin") {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_back_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_back_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_back_60x60)
-                    }
-
-                } else {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.ruby_back_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.ruby_back_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.ruby_back_60x60)
-                    }
-                }
+                drawDownCharacter(characterCell)
             }
             "up" -> {
                 character.orientation = "down"
-                if (character.getName() == "kotlin") {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.kotlin_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.kotlin_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.kotlin_60x60)
-                    }
-
-                } else {
-                    when (level) {
-                        "easy" -> characterCell.setImageResource(R.drawable.ruby_100x100)
-                        "medium" -> characterCell.setImageResource(R.drawable.ruby_75x75)
-                        "hard" -> characterCell.setImageResource(R.drawable.ruby_60x60)
-                    }
-                }
+                drawUpCharacter(characterCell)
             }
         }
     }
 
-    private fun moveXCharacter(x: Int, characterPosition: Array<Int>, level: String?) {
+    private fun moveXCharacter(x: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[1] + x
         if (move < numMaxCellsInRow) {
             val newCell = Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
@@ -563,14 +517,6 @@ class GameActivity : AppCompatActivity() {
 
         when (level) {
             "easy" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
-                showCellEasyLevel(
-                    matrixBoard[characterPosition[0]][move].image,
-                    imageNewCell,
-                    false
-                )
-
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellEasyLevel(
@@ -580,14 +526,6 @@ class GameActivity : AppCompatActivity() {
                 )
             }
             "medium" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
-                showCellMediumLevel(
-                    matrixBoard[characterPosition[0]][move].image,
-                    imageNewCell,
-                    false
-                )
-
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellMediumLevel(
@@ -598,14 +536,6 @@ class GameActivity : AppCompatActivity() {
 
             }
             "hard" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[characterPosition[0]][move].id)
-                showCellHardLevel(
-                    matrixBoard[characterPosition[0]][move].image,
-                    imageNewCell,
-                    false
-                )
-
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellHardLevel(
@@ -615,10 +545,10 @@ class GameActivity : AppCompatActivity() {
                 )
             }
         }
-
+        return findViewById(matrixBoard[characterPosition[0]][move].id)
     }
 
-    private fun moveYCharacter(y: Int, characterPosition: Array<Int>, level: String?) {
+    private fun moveYCharacter(y: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[0] + y
         if (move < numMaxCellsInRow) {
             val newCell = Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
@@ -632,14 +562,6 @@ class GameActivity : AppCompatActivity() {
         }
         when (level) {
             "easy" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
-                showCellEasyLevel(
-                    matrixBoard[move][characterPosition[1]].image,
-                    imageNewCell,
-                    false
-                )
-
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellEasyLevel(
@@ -649,14 +571,6 @@ class GameActivity : AppCompatActivity() {
                 )
             }
             "medium" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
-                showCellMediumLevel(
-                    matrixBoard[move][characterPosition[1]].image,
-                    imageNewCell,
-                    false
-                )
-
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellMediumLevel(
@@ -667,13 +581,6 @@ class GameActivity : AppCompatActivity() {
 
             }
             "hard" -> {
-                val imageNewCell: ImageView =
-                    findViewById(matrixBoard[move][characterPosition[1]].id)
-                showCellHardLevel(
-                    matrixBoard[move][characterPosition[1]].image,
-                    imageNewCell,
-                    false
-                )
                 val imageOldCell: ImageView =
                     findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
                 showCellHardLevel(
@@ -683,6 +590,79 @@ class GameActivity : AppCompatActivity() {
                 )
             }
         }
+
+        return findViewById(matrixBoard[move][characterPosition[1]].id)
+    }
+
+    private fun drawRightCharacter(characterCell: ImageView) {
+        if (character.getName() == "kotlin") {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.kotlin_right_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.kotlin_right_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.kotlin_right_60x60)
+            }
+
+        } else {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.ruby_right_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.ruby_right_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.ruby_right_60x60)
+            }
+        }
+
+    }
+
+    private fun drawLeftCharacter(characterCell: ImageView) {
+        if (character.getName() == "kotlin") {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.kotlin_left_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.kotlin_left_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.kotlin_left_60x60)
+            }
+
+        } else {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.ruby_left_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.ruby_left_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.ruby_left_60x60)
+            }
+        }
+
+    }
+
+    private fun drawUpCharacter(characterCell: ImageView) {
+        if (character.getName() == "kotlin") {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.kotlin_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.kotlin_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.kotlin_60x60)
+            }
+
+        } else {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.ruby_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.ruby_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.ruby_60x60)
+            }
+        }
+    }
+
+    private fun drawDownCharacter(characterCell: ImageView) {
+        if (character.getName() == "kotlin") {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.kotlin_back_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.kotlin_back_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.kotlin_back_60x60)
+            }
+
+        } else {
+            when (level) {
+                "easy" -> characterCell.setImageResource(R.drawable.ruby_back_100x100)
+                "medium" -> characterCell.setImageResource(R.drawable.ruby_back_75x75)
+                "hard" -> characterCell.setImageResource(R.drawable.ruby_back_60x60)
+            }
+        }
+
 
     }
 
