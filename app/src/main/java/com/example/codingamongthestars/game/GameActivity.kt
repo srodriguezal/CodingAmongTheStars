@@ -93,9 +93,9 @@ class GameActivity : AppCompatActivity() {
 
         val trashButton: ImageView = findViewById(R.id.trashButton)
         trashButton.setOnClickListener {
-            if (deck.isEmpty()) {
+            if ((deck.isEmpty()) || (deck.size() < 4)) {
                 deck = Deck()
-                discardDeck = DiscardDeck()
+                discardDeck.setEmpty()
                 discardDeckImage.setImageResource(R.drawable.discard_deck)
 
             } else {
@@ -111,6 +111,11 @@ class GameActivity : AppCompatActivity() {
         val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
+            if (deck.isEmpty()){
+                deck.addCards(discardDeck.getCards())
+                discardDeck.setEmpty()
+                discardDeckImage.setImageResource(R.drawable.discard_deck)
+            }
             if (playerDeck.size < 4) {
                 val newCard: String = deck.dealCard()
                 val invisibleCard: Pair<ImageView, Int> =

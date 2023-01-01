@@ -1,4 +1,5 @@
 <resources>
+    <string name="icon_app_name">CAtS</string>
     <string name="app_name">Coding Among The Stars</string>
     <string name="deck">Deck</string>
     <string name="card">card</string>

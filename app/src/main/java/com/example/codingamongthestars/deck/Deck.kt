@@ -27,6 +27,9 @@ class Deck {
         return deck.isEmpty()
     }
 
+    fun addCards(cards: MutableList<String>){
+        deck.addAll(cards)
+    }
     fun size():Int{
         return deck.size
     }
@@ -47,6 +50,14 @@ class DiscardDeck{
 
     fun getLastCard(): String{
         return discardDeck[discardDeck.size-1]
+    }
+
+    fun getCards(): MutableList<String>{
+        return discardDeck
+    }
+
+    fun setEmpty(){
+        discardDeck = mutableListOf()
     }
 
 }
