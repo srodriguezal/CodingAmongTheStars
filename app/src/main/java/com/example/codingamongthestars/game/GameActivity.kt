@@ -150,7 +150,7 @@ class GameActivity : AppCompatActivity() {
             setTitle(R.string.alert)
             setMessage(message)
             setIcon(R.drawable.alert)
-            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
+            setPositiveButton(R.string.ok_button, DialogInterface.OnClickListener(function = positiveButtonClick))
             setCancelable(false)
             show()
         }
