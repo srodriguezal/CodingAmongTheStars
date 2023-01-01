@@ -442,7 +442,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun moveXCharacter(x: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[1] + x
-        if (move < numMaxCellsInRow) {
+        if ((move < numMaxCellsInRow) && (move >= 0)){
 
             val targetCell: Cell = matrixBoard[characterPosition[0]][move]
             val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
@@ -486,7 +486,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun moveYCharacter(y: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[0] + y
-        if (move < numMaxCellsInRow) {
+        if ((move < numMaxCellsInRow) && (move >= 0)){
 
             val targetCell: Cell = matrixBoard[move][characterPosition[1]]
             val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
