@@ -2,6 +2,7 @@ package com.example.codingamongthestars.game
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -26,10 +27,15 @@ class GameActivity : AppCompatActivity() {
     private var numMaxCellsInRow: Int = 0
     private var lives: Int = 3
     private var level: String? = null
+    private var mediaPlayer: MediaPlayer = MediaPlayer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.game_song)
+        mediaPlayer.start()
+        mediaPlayer.isLooping = true
 
         val bundle = intent.extras
         level = bundle?.getString("level")
@@ -166,6 +172,7 @@ class GameActivity : AppCompatActivity() {
     private fun backToSelectCharacter() {
         val backIntent = Intent(this, CharacterSelectionActivity::class.java)
         backIntent.putExtra("level", level)
+        mediaPlayer.stop()
         startActivity(backIntent)
     }
 
@@ -820,6 +827,7 @@ class GameActivity : AppCompatActivity() {
             val failIntent = Intent(this, LostGameActivity::class.java)
             failIntent.putExtra("level", level)
             failIntent.putExtra("character", characterName)
+            mediaPlayer.stop()
             startActivity(failIntent)
 
         }
@@ -827,6 +835,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun winGame() {
         val winIntent = Intent(this, WinGameActivity::class.java)
+        mediaPlayer.stop()
         startActivity(winIntent)
 
     }
