@@ -403,81 +403,128 @@ class GameActivity : AppCompatActivity() {
 
     private fun playCard(cardImage: ImageView, numCard: Int, discardDeckImage: ImageView) {
         val card = playerDeck[numCard]
-        val characterPosition = character.getPosition()
-        val characterCell: ImageView =
-            findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
+        if (canUseTheCard(card)) {
+            val characterPosition = character.getPosition()
+            val characterCell: ImageView =
+                findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
 
-        when (card) {
-            "goForward" -> {
-                when (character.orientation) {
-                    "right" -> {
-                        val newPositionXRight = moveXCharacter(
-                            1,
-                            characterPosition,
-                            cardImage,
-                            numCard,
-                            discardDeckImage
-                        )
-                        drawRightCharacter(newPositionXRight)
+            when (card) {
+                "goForward" -> {
+                    when (character.orientation) {
+                        "right" -> {
+                            val newPositionXRight = moveXCharacter(1, characterPosition)
+                            drawRightCharacter(newPositionXRight)
 
-                    }
-                    "left" -> {
-                        val newPositionXLeft = moveXCharacter(
-                            -1,
-                            characterPosition,
-                            cardImage,
-                            numCard,
-                            discardDeckImage
-                        )
-                        drawLeftCharacter(newPositionXLeft)
+                        }
+                        "left" -> {
+                            val newPositionXLeft = moveXCharacter(-1, characterPosition)
+                            drawLeftCharacter(newPositionXLeft)
 
+                        }
+                        "up" -> {
+                            val newPositionYUp = moveYCharacter(-1, characterPosition)
+                            drawUpCharacter(newPositionYUp)
+                        }
+                        "down" -> {
+                            val newPositionYDown = moveYCharacter(1, characterPosition)
+                            drawDownCharacter(newPositionYDown)
+                        }
                     }
-                    "up" -> {
-                        val newPositionYUp = moveYCharacter(
-                            -1,
-                            characterPosition,
-                            cardImage,
-                            numCard,
-                            discardDeckImage
-                        )
-                        drawUpCharacter(newPositionYUp)
-                    }
-                    "down" -> {
-                        val newPositionYDown = moveYCharacter(
-                            1,
-                            characterPosition,
-                            cardImage,
-                            numCard,
-                            discardDeckImage
-                        )
-                        drawDownCharacter(newPositionYDown)
-                    }
+
                 }
+                "right" -> {
+                    character.orientation = "right"
+                    drawRightCharacter(characterCell)
 
+                }
+                "left" -> {
+                    character.orientation = "left"
+                    drawLeftCharacter(characterCell)
+
+                }
+                "down" -> {
+                    character.orientation = "down"
+                    drawDownCharacter(characterCell)
+                }
+                "up" -> {
+                    character.orientation = "up"
+                    drawUpCharacter(characterCell)
+
+                }
             }
-            "right" -> {
-                character.orientation = "right"
-                drawRightCharacter(characterCell)
                 discardCard(numCard, cardImage, discardDeckImage)
+        } else {
+            //MOSTRAR ERROR
+        }
+    }
+
+    private fun canUseTheCard(card: String): Boolean {
+        when (card){
+            "right" -> {
+                return character.orientation != "right"
 
             }
             "left" -> {
-                character.orientation = "left"
-                drawLeftCharacter(characterCell)
-                discardCard(numCard, cardImage, discardDeckImage)
+                return character.orientation != "left"
 
             }
             "down" -> {
-                character.orientation = "down"
-                drawDownCharacter(characterCell)
-                discardCard(numCard, cardImage, discardDeckImage)
+                return character.orientation != "down"
             }
             "up" -> {
-                character.orientation = "up"
-                drawUpCharacter(characterCell)
-                discardCard(numCard, cardImage, discardDeckImage)
+                return character.orientation != "up"
             }
+            "goForward" -> {
+                val characterPosition = character.getPosition()
+                when (character.orientation) {
+                    "right" -> {
+                        val newPositionXRight = characterPosition[1] + 1
+                        if (isAvailablePosition(newPositionXRight)){
+                            val targetCell: Cell = matrixBoard[characterPosition[0]][newPositionXRight]
+                            return !(isBlockedPosition(targetCell))
+
+                        }
+
+                    }
+                    "left" -> {
+                        val newPositionXLeft = characterPosition[1] - 1
+                        if (isAvailablePosition(newPositionXLeft)){
+                            val targetCell: Cell = matrixBoard[characterPosition[0]][newPositionXLeft]
+                            return !(isBlockedPosition(targetCell))
+                        }
+                    }
+                    "up" -> {
+                        val newPositionYUp = characterPosition[0] - 1
+                        if (isAvailablePosition(newPositionYUp)){
+                            val targetCell: Cell = matrixBoard[newPositionYUp][characterPosition[1]]
+                            return !(isBlockedPosition(targetCell))
+                        }
+                    }
+                    "down" -> {
+                        val newPositionYDown = characterPosition[0] + 1
+                        if (isAvailablePosition(newPositionYDown)){
+                            val targetCell: Cell = matrixBoard[newPositionYDown][characterPosition[1]]
+                            return !(isBlockedPosition(targetCell))
+                        }
+
+                    }
+                }
+            }
+
         }
+        return false
+    }
+
+    private fun isAvailablePosition(move: Int): Boolean{
+        return (move < numMaxCellsInRow) && (move >= 0)
+
+    }
+
+    private fun isBlockedPosition(targetCell: Cell): Boolean{
+        if (targetCell.image == "block") {
+            findBlockCell(targetCell)
+        }
+        return targetCell.image == "block"
     }
 
     private fun discardCard(numCard: Int, cardImage: ImageView, discardDeckImage: ImageView) {
@@ -489,13 +536,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun moveXCharacter(
-        x: Int,
-        characterPosition: Array<Int>,
-        cardImage: ImageView,
-        numCard: Int,
-        discardDeckImage: ImageView
-    ): ImageView {
+    private fun moveXCharacter(x: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[1] + x
 
         if ((move < numMaxCellsInRow) && (move >= 0)) {
@@ -512,9 +553,6 @@ class GameActivity : AppCompatActivity() {
                 "cpu" -> {
                     findCPUCell(characterPosition, targetCell)
                 }
-                "block" -> {
-                    findBlockCell(targetCell)
-                }
                 else -> {
                     val newCell =
                         Cell(character.getName(), matrixBoard[characterPosition[0]][move].id)
@@ -530,12 +568,6 @@ class GameActivity : AppCompatActivity() {
 
             drawPath(pathCell)
 
-            if (canMove(targetCell)) {
-                discardCard(numCard, cardImage, discardDeckImage)
-            } else {
-                //MOSTRAR ERROR
-            }
-
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
@@ -546,13 +578,7 @@ class GameActivity : AppCompatActivity() {
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
     }
 
-    private fun moveYCharacter(
-        y: Int,
-        characterPosition: Array<Int>,
-        cardImage: ImageView,
-        numCard: Int,
-        discardDeckImage: ImageView
-    ): ImageView {
+    private fun moveYCharacter(y: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[0] + y
         if ((move < numMaxCellsInRow) && (move >= 0)) {
 
@@ -568,9 +594,6 @@ class GameActivity : AppCompatActivity() {
                 "cpu" -> {
                     findCPUCell(characterPosition, targetCell)
                 }
-                "block" -> {
-                    findBlockCell(targetCell)
-                }
                 else -> {
                     val newCell =
                         Cell(character.getName(), matrixBoard[move][characterPosition[1]].id)
@@ -585,12 +608,6 @@ class GameActivity : AppCompatActivity() {
 
             drawPath(pathCell)
 
-            if (canMove(targetCell)) {
-                discardCard(numCard, cardImage, discardDeckImage)
-            } else {
-                //MOSTRAR ERROR
-            }
-
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
@@ -600,10 +617,6 @@ class GameActivity : AppCompatActivity() {
 
         val newPosition = character.getPosition()
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
-    }
-
-    private fun canMove(targetCell: Cell): Boolean {
-        return targetCell.image == "block"
     }
 
     private fun findBlockCell(targetCell: Cell) {
