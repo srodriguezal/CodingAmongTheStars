@@ -11,7 +11,6 @@ import com.example.codingamongthestars.R
 import com.example.codingamongthestars.deck.Deck
 import com.example.codingamongthestars.deck.DiscardDeck
 import com.example.codingamongthestars.mainCharacter.MainCharacter
-import java.util.concurrent.TimeUnit
 
 
 class GameActivity : AppCompatActivity() {
@@ -50,7 +49,6 @@ class GameActivity : AppCompatActivity() {
         setBoard(characterName, board)
 
         val discardDeckImage: ImageView = findViewById(R.id.imgViewDiscardDeck)
-        val newCardImage: ImageView = findViewById(R.id.imgViewNewCard)
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         card1Image.setOnClickListener {
             if (playerDeck.size == 4) {
@@ -111,13 +109,11 @@ class GameActivity : AppCompatActivity() {
 
         deckRollButton.setOnClickListener {
             if (playerDeck.size < 4) {
-                newCardImage.visibility = View.VISIBLE
-                val newCard: String = drawNewCard(newCardImage)
-                //newCardImage.visibility = View.GONE
+                val newCard: String = deck.dealCard()
                 val invisibleCard: Pair<ImageView,Int> =
                     searchInvisibleCardInPlayerDeck(card1Image, card2Image, card3Image, card4Image)
                 invisibleCard.first.visibility = View.VISIBLE
-                invisibleCard.first.setImageDrawable(newCardImage.drawable)
+                drawImageCard(newCard, invisibleCard.first)
                 playerDeck.add(invisibleCard.second, newCard)
 
 
@@ -133,9 +129,6 @@ class GameActivity : AppCompatActivity() {
             discardDeck = DiscardDeck()
             playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
             discardDeckImage.setImageResource(R.drawable.discard_deck)
-            if (newCardImage.visibility == View.VISIBLE) {
-                newCardImage.visibility = View.GONE
-            }
             lives = 3
             setLivesImage()
         }
@@ -393,11 +386,6 @@ class GameActivity : AppCompatActivity() {
             "None" -> cardImage.setImageResource(R.drawable.card_back)
 
         }
-
-    }
-
-    private fun drawNewCard(card: ImageView): String {
-        return dealCard(card)
 
     }
 
