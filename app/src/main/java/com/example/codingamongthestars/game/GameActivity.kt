@@ -110,7 +110,7 @@ class GameActivity : AppCompatActivity() {
         deckRollButton.setOnClickListener {
             if (playerDeck.size < 4) {
                 val newCard: String = deck.dealCard()
-                val invisibleCard: Pair<ImageView,Int> =
+                val invisibleCard: Pair<ImageView, Int> =
                     searchInvisibleCardInPlayerDeck(card1Image, card2Image, card3Image, card4Image)
                 invisibleCard.first.visibility = View.VISIBLE
                 drawImageCard(newCard, invisibleCard.first)
@@ -394,11 +394,11 @@ class GameActivity : AppCompatActivity() {
         card2: ImageView,
         card3: ImageView,
         card4: ImageView
-    ): Pair<ImageView,Int> {
+    ): Pair<ImageView, Int> {
         return if (card1.visibility == View.GONE) Pair(card1, 0)
         else if (card2.visibility == View.GONE) Pair(card2, 1)
-        else if (card3.visibility == View.GONE) Pair(card3,2)
-        else Pair(card4,3)
+        else if (card3.visibility == View.GONE) Pair(card3, 2)
+        else Pair(card4, 3)
     }
 
     private fun playCard(cardImage: ImageView, numCard: Int, discardDeckImage: ImageView) {
@@ -411,21 +411,45 @@ class GameActivity : AppCompatActivity() {
             "goForward" -> {
                 when (character.orientation) {
                     "right" -> {
-                        val newPositionXRight = moveXCharacter(1, characterPosition)
+                        val newPositionXRight = moveXCharacter(
+                            1,
+                            characterPosition,
+                            cardImage,
+                            numCard,
+                            discardDeckImage
+                        )
                         drawRightCharacter(newPositionXRight)
 
                     }
                     "left" -> {
-                        val newPositionXLeft = moveXCharacter(-1, characterPosition)
+                        val newPositionXLeft = moveXCharacter(
+                            -1,
+                            characterPosition,
+                            cardImage,
+                            numCard,
+                            discardDeckImage
+                        )
                         drawLeftCharacter(newPositionXLeft)
 
                     }
                     "up" -> {
-                        val newPositionYUp = moveYCharacter(-1, characterPosition)
+                        val newPositionYUp = moveYCharacter(
+                            -1,
+                            characterPosition,
+                            cardImage,
+                            numCard,
+                            discardDeckImage
+                        )
                         drawUpCharacter(newPositionYUp)
                     }
                     "down" -> {
-                        val newPositionYDown = moveYCharacter(1, characterPosition)
+                        val newPositionYDown = moveYCharacter(
+                            1,
+                            characterPosition,
+                            cardImage,
+                            numCard,
+                            discardDeckImage
+                        )
                         drawDownCharacter(newPositionYDown)
                     }
                 }
@@ -434,23 +458,26 @@ class GameActivity : AppCompatActivity() {
             "right" -> {
                 character.orientation = "right"
                 drawRightCharacter(characterCell)
+                discardCard(numCard, cardImage, discardDeckImage)
 
             }
             "left" -> {
                 character.orientation = "left"
                 drawLeftCharacter(characterCell)
+                discardCard(numCard, cardImage, discardDeckImage)
 
             }
             "down" -> {
                 character.orientation = "down"
                 drawDownCharacter(characterCell)
+                discardCard(numCard, cardImage, discardDeckImage)
             }
             "up" -> {
                 character.orientation = "up"
                 drawUpCharacter(characterCell)
+                discardCard(numCard, cardImage, discardDeckImage)
             }
         }
-        discardCard(numCard, cardImage, discardDeckImage)
     }
 
     private fun discardCard(numCard: Int, cardImage: ImageView, discardDeckImage: ImageView) {
@@ -462,7 +489,13 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun moveXCharacter(x: Int, characterPosition: Array<Int>): ImageView {
+    private fun moveXCharacter(
+        x: Int,
+        characterPosition: Array<Int>,
+        cardImage: ImageView,
+        numCard: Int,
+        discardDeckImage: ImageView
+    ): ImageView {
         val move = characterPosition[1] + x
 
         if ((move < numMaxCellsInRow) && (move >= 0)) {
@@ -498,7 +531,9 @@ class GameActivity : AppCompatActivity() {
             drawPath(pathCell)
 
             if (canMove(targetCell)) {
-                // DO THINGS
+                discardCard(numCard, cardImage, discardDeckImage)
+            } else {
+                //MOSTRAR ERROR
             }
 
             if (targetCell.image.contains("planet")) {
@@ -511,7 +546,13 @@ class GameActivity : AppCompatActivity() {
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
     }
 
-    private fun moveYCharacter(y: Int, characterPosition: Array<Int>): ImageView {
+    private fun moveYCharacter(
+        y: Int,
+        characterPosition: Array<Int>,
+        cardImage: ImageView,
+        numCard: Int,
+        discardDeckImage: ImageView
+    ): ImageView {
         val move = characterPosition[0] + y
         if ((move < numMaxCellsInRow) && (move >= 0)) {
 
@@ -543,6 +584,12 @@ class GameActivity : AppCompatActivity() {
             }
 
             drawPath(pathCell)
+
+            if (canMove(targetCell)) {
+                discardCard(numCard, cardImage, discardDeckImage)
+            } else {
+                //MOSTRAR ERROR
+            }
 
             if (targetCell.image.contains("planet")) {
                 winGame()
