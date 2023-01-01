@@ -11,6 +11,7 @@ import com.example.codingamongthestars.R
 import com.example.codingamongthestars.deck.Deck
 import com.example.codingamongthestars.deck.DiscardDeck
 import com.example.codingamongthestars.mainCharacter.MainCharacter
+import java.util.concurrent.TimeUnit
 
 
 class GameActivity : AppCompatActivity() {
@@ -53,7 +54,7 @@ class GameActivity : AppCompatActivity() {
         val card1Image: ImageView = findViewById(R.id.imgViewCard1)
         card1Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card1Image, 0)
+                playCard(card1Image, 0, discardDeckImage)
             } else {
                 //Mostrar error
             }
@@ -63,7 +64,7 @@ class GameActivity : AppCompatActivity() {
         val card2Image: ImageView = findViewById(R.id.imgViewCard2)
         card2Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card2Image, 1)
+                playCard(card2Image, 1, discardDeckImage)
             } else {
                 //Mostrar error
             }
@@ -72,7 +73,7 @@ class GameActivity : AppCompatActivity() {
         val card3Image: ImageView = findViewById(R.id.imgViewCard3)
         card3Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card3Image, 2)
+                playCard(card3Image, 2, discardDeckImage)
             } else {
                 //Mostrar error
             }
@@ -81,7 +82,7 @@ class GameActivity : AppCompatActivity() {
         val card4Image: ImageView = findViewById(R.id.imgViewCard4)
         card4Image.setOnClickListener {
             if (playerDeck.size == 4) {
-                playCard(card4Image, 3)
+                playCard(card4Image, 3, discardDeckImage)
             } else {
                 //Mostrar error
             }
@@ -99,19 +100,29 @@ class GameActivity : AppCompatActivity() {
             } else {
                 discardDeck.addCards(playerDeck)
                 val lastCardDiscarded = discardDeck.getLastCard()
-                setImageCard(lastCardDiscarded, discardDeckImage)
+                drawImageCard(lastCardDiscarded, discardDeckImage)
 
             }
             playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
-            println(deck.size())
 
         }
 
         val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
-            newCardImage.visibility = View.VISIBLE
-            drawNewCard(newCardImage)
+            if (playerDeck.size < 4) {
+                newCardImage.visibility = View.VISIBLE
+                val newCard: String = drawNewCard(newCardImage)
+                //newCardImage.visibility = View.GONE
+                val invisibleCard: Pair<ImageView,Int> =
+                    searchInvisibleCardInPlayerDeck(card1Image, card2Image, card3Image, card4Image)
+                invisibleCard.first.visibility = View.VISIBLE
+                invisibleCard.first.setImageDrawable(newCardImage.drawable)
+                playerDeck.add(invisibleCard.second, newCard)
+
+
+            }
+
         }
 
         val restartButton: ImageView = findViewById(R.id.restartButton)
@@ -310,7 +321,6 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-
     private fun drawMediumBoard(
         cellContent: String?,
         cellImageView: ImageView
@@ -349,6 +359,10 @@ class GameActivity : AppCompatActivity() {
         card1: ImageView, card2: ImageView, card3: ImageView, card4: ImageView
     ): MutableList<String> {
         return if (!deck.isEmpty()) {
+            card1.visibility = View.VISIBLE
+            card2.visibility = View.VISIBLE
+            card3.visibility = View.VISIBLE
+            card4.visibility = View.VISIBLE
             mutableListOf(
                 dealCard(card1),
                 dealCard(card2),
@@ -362,14 +376,14 @@ class GameActivity : AppCompatActivity() {
     private fun dealCard(cardImage: ImageView): String {
         return if (!deck.isEmpty()) {
             val card = deck.dealCard()
-            setImageCard(card, cardImage)
+            drawImageCard(card, cardImage)
             card
         } else {
             "deckEmpty"
         }
     }
 
-    private fun setImageCard(card: String, cardImage: ImageView) {
+    private fun drawImageCard(card: String, cardImage: ImageView) {
         when (card) {
             "goForward" -> cardImage.setImageResource(R.drawable.card_go_forward)
             "right" -> cardImage.setImageResource(R.drawable.card_right)
@@ -382,15 +396,25 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawNewCard(card: ImageView) {
-        dealCard(card)
+    private fun drawNewCard(card: ImageView): String {
+        return dealCard(card)
 
     }
 
-    private fun playCard(cardImage: ImageView, numCard: Int) {
-        //cardImage.visibility = View.GONE
+    private fun searchInvisibleCardInPlayerDeck(
+        card1: ImageView,
+        card2: ImageView,
+        card3: ImageView,
+        card4: ImageView
+    ): Pair<ImageView,Int> {
+        return if (card1.visibility == View.GONE) Pair(card1, 0)
+        else if (card2.visibility == View.GONE) Pair(card2, 1)
+        else if (card3.visibility == View.GONE) Pair(card3,2)
+        else Pair(card4,3)
+    }
+
+    private fun playCard(cardImage: ImageView, numCard: Int, discardDeckImage: ImageView) {
         val card = playerDeck[numCard]
-        //playerDeck.removeAt(numCard)
         val characterPosition = character.getPosition()
         val characterCell: ImageView =
             findViewById(matrixBoard[characterPosition[0]][characterPosition[1]].id)
@@ -438,11 +462,22 @@ class GameActivity : AppCompatActivity() {
                 drawUpCharacter(characterCell)
             }
         }
+        discardCard(numCard, cardImage, discardDeckImage)
+    }
+
+    private fun discardCard(numCard: Int, cardImage: ImageView, discardDeckImage: ImageView) {
+        cardImage.visibility = View.GONE
+        discardDeck.discardCard(playerDeck[numCard])
+        drawImageCard(playerDeck[numCard], discardDeckImage)
+        playerDeck.removeAt(numCard)
+
+
     }
 
     private fun moveXCharacter(x: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[1] + x
-        if ((move < numMaxCellsInRow) && (move >= 0)){
+
+        if ((move < numMaxCellsInRow) && (move >= 0)) {
 
             val targetCell: Cell = matrixBoard[characterPosition[0]][move]
             val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
@@ -474,6 +509,10 @@ class GameActivity : AppCompatActivity() {
 
             drawPath(pathCell)
 
+            if (canMove(targetCell)) {
+                // DO THINGS
+            }
+
             if (targetCell.image.contains("planet")) {
                 winGame()
             }
@@ -486,7 +525,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun moveYCharacter(y: Int, characterPosition: Array<Int>): ImageView {
         val move = characterPosition[0] + y
-        if ((move < numMaxCellsInRow) && (move >= 0)){
+        if ((move < numMaxCellsInRow) && (move >= 0)) {
 
             val targetCell: Cell = matrixBoard[move][characterPosition[1]]
             val currentCell: Cell = matrixBoard[characterPosition[0]][characterPosition[1]]
@@ -526,6 +565,10 @@ class GameActivity : AppCompatActivity() {
 
         val newPosition = character.getPosition()
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
+    }
+
+    private fun canMove(targetCell: Cell): Boolean {
+        return targetCell.image == "block"
     }
 
     private fun findBlockCell(targetCell: Cell) {
@@ -582,7 +625,8 @@ class GameActivity : AppCompatActivity() {
         return if ((newX == ((numMaxCellsInRow / 2) - 1) && (newY == (numMaxCellsInRow / 2) - 1)) ||
             ((newX == (numMaxCellsInRow / 2 - 1)) && newY == numMaxCellsInRow / 2) ||
             (newX == numMaxCellsInRow / 2 && newY == ((numMaxCellsInRow / 2) - 1)) ||
-            (newX == numMaxCellsInRow / 2 && newY == numMaxCellsInRow / 2)) {
+            (newX == numMaxCellsInRow / 2 && newY == numMaxCellsInRow / 2)
+        ) {
             findNewPosition()
         } else {
             newPosition

@@ -37,6 +37,10 @@ class Deck {
 class DiscardDeck{
     private var discardDeck: MutableList<String> = mutableListOf()
 
+    fun discardCard(card: String){
+        discardDeck.add(card)
+    }
+
     fun addCards(cards: MutableList<String>){
         discardDeck.addAll(cards)
     }
