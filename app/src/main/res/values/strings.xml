@@ -15,5 +15,10 @@
     <string name="back_button">Return to prevoius screen</string>
     <string name="help_button">Learn how to play</string>
     <string name="path_image">Image of the path</string>
+    <string name="alert">"ATENCIÓN"</string>
+    <string name="alert_playing_card">Tienes que robar una carta antes de poder usar otra</string>
+    <string name="deck_roll_button_error">No puedes robar más cartas</string>
+    <string name="playing_card_error">No puedes usar esa carta</string>
+    <string name="move_error">No puedes moverte hacia ahí</string>
 
 </resources>

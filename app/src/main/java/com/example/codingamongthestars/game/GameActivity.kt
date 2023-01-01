@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
@@ -58,7 +57,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card1Image, 0, discardDeckImage)
             } else {
-                createAlertPopUp("Tienes que robar una carta antes de poder usar otra")
+                createAlertPopUp(R.string.alert_playing_card)
             }
 
         }
@@ -68,7 +67,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card2Image, 1, discardDeckImage)
             } else {
-                createAlertPopUp("Tienes que robar una carta antes de poder usar otra")
+                createAlertPopUp(R.string.alert_playing_card)
             }
         }
 
@@ -77,7 +76,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card3Image, 2, discardDeckImage)
             } else {
-                createAlertPopUp("Tienes que robar una carta antes de poder usar otra")
+                createAlertPopUp(R.string.alert_playing_card)
             }
         }
 
@@ -86,7 +85,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card4Image, 3, discardDeckImage)
             } else {
-                createAlertPopUp("Tienes que robar una carta antes de poder usar otra")
+                createAlertPopUp(R.string.alert_playing_card)
             }
         }
 
@@ -122,7 +121,7 @@ class GameActivity : AppCompatActivity() {
 
 
             } else {
-                createAlertPopUp("No puedes robar más cartas")
+                createAlertPopUp(R.string.deck_roll_button_error)
             }
 
         }
@@ -141,18 +140,21 @@ class GameActivity : AppCompatActivity() {
 
 
     }
-    private fun createAlertPopUp(message: String){
+    private fun createAlertPopUp(message: Int){
         val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
         val positiveButtonClick = { _: DialogInterface, _: Int ->
         }
 
         with(builder)
         {
-            setTitle("ATENCIÓN")
+            setTitle(R.string.alert)
             setMessage(message)
+            setIcon(R.drawable.alert)
             setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
+            setCancelable(false)
             show()
         }
+
 
     }
 
@@ -474,7 +476,7 @@ class GameActivity : AppCompatActivity() {
             }
                 discardCard(numCard, cardImage, discardDeckImage)
         } else {
-            createAlertPopUp("No puedes usar esa carta")
+            createAlertPopUp(R.string.playing_card_error)
         }
     }
 
@@ -592,7 +594,7 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            createAlertPopUp("No puedes moverte hacia ahí")
+            createAlertPopUp(R.string.move_error)
         }
         val newPosition = character.getPosition()
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
@@ -632,7 +634,7 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            createAlertPopUp("No puedes moverte hacia ahí")
+            createAlertPopUp(R.string.move_error)
         }
 
         val newPosition = character.getPosition()
