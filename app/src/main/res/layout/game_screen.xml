@@ -75,10 +75,21 @@
         app:srcCompat="@drawable/card_back" />
 
     <ImageView
+        android:id="@+id/discard_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgViewDiscardDeck"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgViewDiscardDeck"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewDiscardDeck"
+        app:srcCompat="@drawable/discard_label" />
+
+    <ImageView
         android:id="@+id/imgViewDiscardDeck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="150dp"
         app:layout_constraintBottom_toBottomOf="@+id/deckButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -86,6 +97,16 @@
         app:layout_constraintTop_toTopOf="@+id/deckButton"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/discard_deck" />
+
+    <ImageView
+        android:id="@+id/sound_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/helpGameButton"
+        app:layout_constraintStart_toStartOf="@+id/helpGameButton"
+        app:srcCompat="@drawable/sound_on" />
 
     <TableLayout
         android:id="@+id/gameTableLayout"

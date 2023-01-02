@@ -43,6 +43,21 @@ class GameActivity : AppCompatActivity() {
         characterName?.let { character.setName(it) }
         setLivesImage()
 
+        val sound: ImageView = findViewById(R.id.sound_game_button)
+        var soundOn = true
+        sound.setOnClickListener {
+            soundOn = if (soundOn){
+                mediaPlayer.pause()
+                sound.setImageResource(R.drawable.sound_off)
+                false
+            } else{
+                mediaPlayer.start()
+                sound.setImageResource(R.drawable.sound_on)
+                true
+
+            }
+        }
+
         val backButton: ImageView = findViewById(R.id.backGameButton)
         backButton.setOnClickListener {
             backToSelectCharacter()
