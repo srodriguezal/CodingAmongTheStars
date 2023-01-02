@@ -112,23 +112,6 @@ class GameActivity : AppCompatActivity() {
 
         playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
 
-        val trashButton: ImageView = findViewById(R.id.trashButton)
-        trashButton.setOnClickListener {
-            if ((deck.isEmpty()) || (deck.size() < 4)) {
-                deck = Deck()
-                discardDeck.setEmpty()
-                discardDeckImage.setImageResource(R.drawable.discard_deck)
-
-            } else {
-                discardDeck.addCards(playerDeck)
-                val lastCardDiscarded = discardDeck.getLastCard()
-                drawImageCard(lastCardDiscarded, discardDeckImage)
-
-            }
-            playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
-
-        }
-
         val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
@@ -149,6 +132,23 @@ class GameActivity : AppCompatActivity() {
             } else {
                 createAlertPopUp(R.string.deck_roll_button_error)
             }
+
+        }
+
+        val trashButton: ImageView = findViewById(R.id.trashButton)
+        trashButton.setOnClickListener {
+            if ((deck.isEmpty()) || (deck.size() < 4)) {
+                deck = Deck()
+                discardDeck.setEmpty()
+                discardDeckImage.setImageResource(R.drawable.discard_deck)
+
+            } else {
+                discardDeck.addCards(playerDeck)
+                val lastCardDiscarded = discardDeck.getLastCard()
+                drawImageCard(lastCardDiscarded, discardDeckImage)
+
+            }
+            playerDeck = setPlayerDeck(card1Image, card2Image, card3Image, card4Image)
 
         }
 
@@ -173,8 +173,7 @@ class GameActivity : AppCompatActivity() {
 
         with(builder)
         {
-            setTitle(R.string.alert)
-            setMessage(message)
+            setTitle(message)
             setIcon(R.drawable.alert)
             setPositiveButton(R.string.ok_button, DialogInterface.OnClickListener(function = positiveButtonClick))
             setCancelable(false)
@@ -673,7 +672,7 @@ class GameActivity : AppCompatActivity() {
         drawBlock(blockCell)
     }
 
-    private fun findCPUCell(
+    private fun findBugCell(
         characterPosition: Array<Int>,
         targetCell: Cell
     ) {
@@ -688,12 +687,12 @@ class GameActivity : AppCompatActivity() {
             Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
         matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
 
-        val cpuCell: ImageView = findViewById(targetCell.id)
-        drawCPU(cpuCell)
+        val bugCell: ImageView = findViewById(targetCell.id)
+        drawBug(bugCell)
         character.setPosition(numMaxCellsInRow - 1, 0)
     }
 
-    private fun findBugCell(
+    private fun findCPUCell(
         characterPosition: Array<Int>,
         targetCell: Cell
     ) {
@@ -709,8 +708,8 @@ class GameActivity : AppCompatActivity() {
             Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
         matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
 
-        val bugCell: ImageView = findViewById(targetCell.id)
-        drawBug(bugCell)
+        val cpuCell: ImageView = findViewById(targetCell.id)
+        drawCPU(cpuCell)
         character.setPosition(newPosition[0], newPosition[1])
     }
 
