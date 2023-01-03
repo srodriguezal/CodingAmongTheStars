@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.codingamongthestars.MainActivity
 import com.example.codingamongthestars.R
+import com.example.codingamongthestars.augmentedReality.AugmentedRealityActivity
 
 class LevelSelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class LevelSelectionActivity : AppCompatActivity() {
             selectCharacter("hard")
         }
         backButton.setOnClickListener {
-            backToMainScreen()
+            backToARScreen()
         }
     }
 
@@ -40,8 +40,8 @@ class LevelSelectionActivity : AppCompatActivity() {
         startActivity(intentCharacterSelection)
     }
 
-    private fun backToMainScreen() {
-        val backIntent = Intent(this, MainActivity::class.java)
+    private fun backToARScreen() {
+        val backIntent = Intent(this, AugmentedRealityActivity::class.java)
         startActivity(backIntent)
     }
 }

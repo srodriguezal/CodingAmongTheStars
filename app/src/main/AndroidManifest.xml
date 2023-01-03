@@ -51,7 +51,11 @@
             android:screenOrientation="landscape"
             android:exported="true">
         </activity>
-
+        <activity
+            android:name="com.example.codingamongthestars.augmentedReality.AugmentedRealityActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

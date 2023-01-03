@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.codingamongthestars.game.LevelSelectionActivity
+import com.example.codingamongthestars.augmentedReality.AugmentedRealityActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
-        val startIntent = Intent(this, LevelSelectionActivity::class.java)
+        val startIntent = Intent(this, AugmentedRealityActivity::class.java)
         mediaPlayer.stop()
         startActivity(startIntent)
     }

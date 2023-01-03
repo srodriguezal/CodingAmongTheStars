@@ -4,6 +4,8 @@
     <string name="deck">Deck</string>
     <string name="card">card</string>
     <string name="start">COMENZAR</string>
+    <string name="ar_alert">No se ha podido acceder a la Realidad Aumentada, ¿tienes la app "Coding Among the Stars AR" instalada?</string>
+    <string name="ar_alert_button">CERRAR</string>
     <string name="easy_level">NIVEL FÁCIL</string>
     <string name="medium_level">NIVEL MEDIO</string>
     <string name="hard_level">NIVEL DIFÍCIL</string>
