@@ -35,7 +35,7 @@ class AugmentedRealityActivity : AppCompatActivity() {
 
     private fun startAR() {
         val intentStartAR =
-            packageManager.getLaunchIntentForPackage("com.sararodriguezalarcon.codingamonthestarsar")
+            packageManager.getLaunchIntentForPackage("com.codingAmongTheStarsAr")
         if (intentStartAR != null) {
             startActivity(intentStartAR)
         } else {
