@@ -230,7 +230,7 @@ class GameActivity : AppCompatActivity() {
         numCells: Int,
         numBlocks: Int,
         numBugs: Int,
-        numCPUs: Int
+        numBackdoors: Int
     ) {
         val matrix = Array(numCells) { Array(numCells) { Cell("", -1) } }
         for (i in (0 until numCells)) {
@@ -263,7 +263,7 @@ class GameActivity : AppCompatActivity() {
         setCharacterInMatrix(characterName, numCells)
         setSpecialCells(numCells, "block", numBlocks)
         setSpecialCells(numCells, "bug", numBugs)
-        setSpecialCells(numCells, "cpu", numCPUs)
+        setSpecialCells(numCells, "backdoor", numBackdoors)
 
 
     }
@@ -598,8 +598,8 @@ class GameActivity : AppCompatActivity() {
                     findBugCell(characterPosition, targetCell)
 
                 }
-                "cpu" -> {
-                    findCPUCell(characterPosition, targetCell)
+                "backdoor" -> {
+                    findBackdoorCell(characterPosition, targetCell)
                 }
                 else -> {
                     val newCell =
@@ -639,8 +639,8 @@ class GameActivity : AppCompatActivity() {
                     findBugCell(characterPosition, targetCell)
 
                 }
-                "cpu" -> {
-                    findCPUCell(characterPosition, targetCell)
+                "backdoor" -> {
+                    findBackdoorCell(characterPosition, targetCell)
                 }
                 else -> {
                     val newCell =
@@ -692,7 +692,7 @@ class GameActivity : AppCompatActivity() {
         character.setPosition(numMaxCellsInRow - 1, 0)
     }
 
-    private fun findCPUCell(
+    private fun findBackdoorCell(
         characterPosition: Array<Int>,
         targetCell: Cell
     ) {
@@ -708,8 +708,8 @@ class GameActivity : AppCompatActivity() {
             Cell("path", matrixBoard[characterPosition[0]][characterPosition[1]].id)
         matrixBoard[characterPosition[0]][characterPosition[1]] = oldCell
 
-        val cpuCell: ImageView = findViewById(targetCell.id)
-        drawCPU(cpuCell)
+        val backdoorCell: ImageView = findViewById(targetCell.id)
+        drawBackdoor(backdoorCell)
         character.setPosition(newPosition[0], newPosition[1])
     }
 
@@ -828,10 +828,10 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawCPU(imageCell: ImageView) {
+    private fun drawBackdoor(imageCell: ImageView) {
         when (level) {
-            "medium" -> imageCell.setImageResource(R.drawable.cpu_75x75)
-            "hard" -> imageCell.setImageResource(R.drawable.cpu_60x60)
+            "medium" -> imageCell.setImageResource(R.drawable.backdoor_75x75)
+            "hard" -> imageCell.setImageResource(R.drawable.backdoor_60x60)
         }
 
     }
