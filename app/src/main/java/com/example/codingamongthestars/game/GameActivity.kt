@@ -228,7 +228,7 @@ class GameActivity : AppCompatActivity() {
     private fun createMatrix(
         characterName: String?,
         numCells: Int,
-        numBlocks: Int,
+        numFirewalls: Int,
         numBugs: Int,
         numBackdoors: Int
     ) {
@@ -261,7 +261,7 @@ class GameActivity : AppCompatActivity() {
         }
         matrixBoard = matrix
         setCharacterInMatrix(characterName, numCells)
-        setSpecialCells(numCells, "block", numBlocks)
+        setSpecialCells(numCells, "firewall", numFirewalls)
         setSpecialCells(numCells, "bug", numBugs)
         setSpecialCells(numCells, "backdoor", numBackdoors)
 
@@ -569,10 +569,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun isBlockedPosition(targetCell: Cell): Boolean{
-        if (targetCell.image == "block") {
-            findBlockCell(targetCell)
+        if (targetCell.image == "firewall") {
+            findFirewallCell(targetCell)
         }
-        return targetCell.image == "block"
+        return targetCell.image == "firewall"
     }
 
     private fun discardCard(numCard: Int, cardImage: ImageView, discardDeckImage: ImageView) {
@@ -667,9 +667,9 @@ class GameActivity : AppCompatActivity() {
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
     }
 
-    private fun findBlockCell(targetCell: Cell) {
-        val blockCell: ImageView = findViewById(targetCell.id)
-        drawBlock(blockCell)
+    private fun findFirewallCell(targetCell: Cell) {
+        val firewallCell: ImageView = findViewById(targetCell.id)
+        drawFirewall(firewallCell)
     }
 
     private fun findBugCell(
@@ -810,11 +810,11 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun drawBlock(imageCell: ImageView) {
+    private fun drawFirewall(imageCell: ImageView) {
         when (level) {
-            "easy" -> imageCell.setImageResource(R.drawable.bricks_100x100)
-            "medium" -> imageCell.setImageResource(R.drawable.bricks_75x75)
-            "hard" -> imageCell.setImageResource(R.drawable.bricks_60x60)
+            "easy" -> imageCell.setImageResource(R.drawable.firewall_100x100)
+            "medium" -> imageCell.setImageResource(R.drawable.firewall_75x75)
+            "hard" -> imageCell.setImageResource(R.drawable.firewall_60x60)
         }
 
     }
