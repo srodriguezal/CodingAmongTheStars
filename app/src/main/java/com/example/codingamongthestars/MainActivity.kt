@@ -33,17 +33,33 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+        var language = "spanish"
+        val languageButton: ImageView = findViewById(R.id.language_button)
 
         val startButton: Button = findViewById(R.id.startButton)
 
         startButton.setOnClickListener {
-            startGame()
+            startGame(language)
+        }
+
+        languageButton.setOnClickListener{
+            if (language == "spanish"){
+                language = "english"
+                languageButton.setImageResource(R.drawable.spanish)
+                startButton.text = this.resources.getString(R.string.start_english)
+
+            } else {
+                language = "spanish"
+                languageButton.setImageResource(R.drawable.english)
+                startButton.text = this.resources.getString(R.string.start_spanish)
+            }
         }
     }
 
-    private fun startGame() {
+    private fun startGame(language: String) {
         val startIntent = Intent(this, AugmentedRealityActivity::class.java)
         mediaPlayer.stop()
+        startIntent.putExtra("language", language)
         startActivity(startIntent)
     }
 }

@@ -5,13 +5,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/defeat_background">
 
+    <TextView
+        android:id="@+id/lostScreenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:text="@string/lost_screen_text_spanish"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/retryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/retryButton"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
-        android:text="@string/retry"
+        android:text="@string/retry_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,11 +42,13 @@
         android:layout_marginBottom="40dp"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
-        android:text="@string/finish"
+        android:text="@string/finish_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/retryButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

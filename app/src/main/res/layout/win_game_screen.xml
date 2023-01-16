@@ -5,13 +5,27 @@
     android:layout_height="match_parent"
     android:background="@drawable/victory_background">
 
+
+    <TextView
+    android:id="@+id/winScreenTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/zcool_qingke_huangyou"
+    android:text="@string/win_screen_text_spanish"
+    android:textColor="#FFFFFF"
+    android:textSize="48sp"
+    app:layout_constraintBottom_toTopOf="@+id/chooseLevelButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/chooseLevelButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
-        android:text="@string/yes"
+        android:text="@string/yes_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,4 +49,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseLevelButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

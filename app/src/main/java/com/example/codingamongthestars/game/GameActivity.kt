@@ -18,6 +18,7 @@ import com.example.codingamongthestars.mainCharacter.MainCharacter
 
 
 class GameActivity : AppCompatActivity() {
+    private var language: String? = null
     private var matrixBoard: Array<Array<Cell>> = emptyArray()
     private var deck: Deck = Deck()
     private var discardDeck: DiscardDeck = DiscardDeck()
@@ -40,6 +41,7 @@ class GameActivity : AppCompatActivity() {
         val bundle = intent.extras
         level = bundle?.getString("level")
         characterName = bundle?.getString("character")
+        language = bundle?.getString("language")
         characterName?.let { character.setName(it) }
         setLivesImage()
 
@@ -78,7 +80,12 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card1Image, 0, discardDeckImage)
             } else {
-                createAlertPopUp(R.string.alert_playing_card)
+                if (language == "english"){
+                    createAlertPopUp(R.string.alert_playing_card_english)
+
+                } else {
+                    createAlertPopUp(R.string.alert_playing_card_spanish)
+                }
             }
 
         }
@@ -88,7 +95,13 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card2Image, 1, discardDeckImage)
             } else {
-                createAlertPopUp(R.string.alert_playing_card)
+                if (language == "english") {
+                    createAlertPopUp(R.string.alert_playing_card_english)
+
+                } else {
+                    createAlertPopUp(R.string.alert_playing_card_spanish)
+                }
+
             }
         }
 
@@ -97,7 +110,12 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card3Image, 2, discardDeckImage)
             } else {
-                createAlertPopUp(R.string.alert_playing_card)
+                if (language == "english") {
+                    createAlertPopUp(R.string.alert_playing_card_english)
+
+                } else {
+                    createAlertPopUp(R.string.alert_playing_card_spanish)
+                }
             }
         }
 
@@ -106,7 +124,13 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card4Image, 3, discardDeckImage)
             } else {
-                createAlertPopUp(R.string.alert_playing_card)
+                if (language == "english"){
+                    createAlertPopUp(R.string.alert_playing_card_english)
+
+                } else {
+                    createAlertPopUp(R.string.alert_playing_card_spanish)
+                }
+
             }
         }
 
@@ -130,7 +154,13 @@ class GameActivity : AppCompatActivity() {
 
 
             } else {
-                createAlertPopUp(R.string.deck_roll_button_error)
+                if (language == "english"){
+                    createAlertPopUp(R.string.deck_roll_button_error_english)
+
+                } else {
+                    createAlertPopUp(R.string.deck_roll_button_error_spanish)
+                }
+
             }
 
         }
@@ -175,7 +205,12 @@ class GameActivity : AppCompatActivity() {
         {
             setTitle(message)
             setIcon(R.drawable.alert)
-            setPositiveButton(R.string.ok_button, DialogInterface.OnClickListener(function = positiveButtonClick))
+            if (language == "english"){
+                setPositiveButton(R.string.ok_button_english, DialogInterface.OnClickListener(function = positiveButtonClick))
+
+            } else {
+                setPositiveButton(R.string.ok_button_spanish, DialogInterface.OnClickListener(function = positiveButtonClick))
+            }
             setCancelable(false)
             show()
         }
@@ -186,6 +221,7 @@ class GameActivity : AppCompatActivity() {
     private fun backToSelectCharacter() {
         val backIntent = Intent(this, CharacterSelectionActivity::class.java)
         backIntent.putExtra("level", level)
+        backIntent.putExtra("language", language)
         mediaPlayer.stop()
         startActivity(backIntent)
     }
@@ -502,7 +538,13 @@ class GameActivity : AppCompatActivity() {
             }
                 discardCard(numCard, cardImage, discardDeckImage)
         } else {
-            createAlertPopUp(R.string.playing_card_error)
+            if (language == "english"){
+                createAlertPopUp(R.string.playing_card_error_english)
+
+            } else {
+                createAlertPopUp(R.string.playing_card_error_spanish)
+            }
+
         }
     }
 
@@ -620,7 +662,13 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            createAlertPopUp(R.string.move_error)
+            if (language == "english"){
+                createAlertPopUp(R.string.move_error_english)
+
+            } else {
+                createAlertPopUp(R.string.move_error_spanish)
+            }
+
         }
         val newPosition = character.getPosition()
         return findViewById(matrixBoard[newPosition[0]][newPosition[1]].id)
@@ -660,7 +708,13 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            createAlertPopUp(R.string.move_error)
+            if (language == "english"){
+                createAlertPopUp(R.string.move_error_english)
+
+            } else {
+                createAlertPopUp(R.string.move_error_spanish)
+            }
+
         }
 
         val newPosition = character.getPosition()
@@ -841,6 +895,7 @@ class GameActivity : AppCompatActivity() {
             val failIntent = Intent(this, LostGameActivity::class.java)
             failIntent.putExtra("level", level)
             failIntent.putExtra("character", characterName)
+            failIntent.putExtra("language", language)
             mediaPlayer.stop()
             startActivity(failIntent)
 
@@ -849,6 +904,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun winGame() {
         val winIntent = Intent(this, WinGameActivity::class.java)
+        winIntent.putExtra("language", language)
         mediaPlayer.stop()
         startActivity(winIntent)
 
