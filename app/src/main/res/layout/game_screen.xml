@@ -28,16 +28,21 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/trash_button" />
 
-    <ImageView
+    <TextView
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:background="@drawable/restart_button"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:gravity="center"
+        android:text="@string/restart_button_spanish"
+        android:textColor="#000000"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/trashButton"
         app:layout_constraintEnd_toStartOf="@+id/trashButton"
         app:layout_constraintTop_toTopOf="@+id/trashButton"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/restart_button" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/helpGameButton"
@@ -74,16 +79,21 @@
         app:layout_constraintVertical_bias="0.482"
         app:srcCompat="@drawable/card_back" />
 
-    <ImageView
+    <TextView
         android:id="@+id/discard_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:background="@drawable/discard_label"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:text="@string/discard_label_spanish"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/imgViewDiscardDeck"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imgViewDiscardDeck"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewDiscardDeck"
-        app:srcCompat="@drawable/discard_label" />
+        app:layout_constraintTop_toBottomOf="@+id/imgViewDiscardDeck" />
 
     <ImageView
         android:id="@+id/imgViewDiscardDeck"

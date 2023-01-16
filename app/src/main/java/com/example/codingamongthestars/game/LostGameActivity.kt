@@ -1,7 +1,6 @@
 package com.example.codingamongthestars.game
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView

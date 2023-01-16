@@ -12,7 +12,7 @@
     <string name="easy_level_spanish">NIVEL FÁCIL</string>
     <string name="easy_level_english">EASY LEVEL</string>
     <string name="medium_level_spanish">NIVEL MEDIO</string>
-    <string name="medium_level_english">NORMAL LEVEL</string>
+    <string name="medium_level_english">MEDIUM LEVEL</string>
     <string name="hard_level_spanish">NIVEL DIFÍCIL</string>
     <string name="hard_level_english">HARD LEVEL</string>
     <string name="finish_spanish">SALIR</string>
@@ -26,6 +26,10 @@
     <string name="ruby_button">Choose Ruby in selection character screen</string>
     <string name="back_button">Return to prevoius screen</string>
     <string name="help_button">Learn how to play</string>
+    <string name="restart_button_spanish">REINICIAR</string>
+    <string name="restart_button_english">RESTART</string>
+    <string name="discard_label_spanish">DESCARTADAS</string>
+    <string name="discard_label_english">DISCARDED</string>
     <string name="path_image">Image of the path</string>
     <string name="ok_button_spanish">"ENTENDIDO"</string>
     <string name="ok_button_english">"GOT IT"</string>

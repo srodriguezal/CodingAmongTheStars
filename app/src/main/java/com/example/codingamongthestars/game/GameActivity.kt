@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
@@ -48,16 +49,21 @@ class GameActivity : AppCompatActivity() {
         val sound: ImageView = findViewById(R.id.sound_game_button)
         var soundOn = true
         sound.setOnClickListener {
-            soundOn = if (soundOn){
+            soundOn = if (soundOn) {
                 mediaPlayer.pause()
                 sound.setImageResource(R.drawable.sound_off)
                 false
-            } else{
+            } else {
                 mediaPlayer.start()
                 sound.setImageResource(R.drawable.sound_on)
                 true
 
             }
+        }
+
+        val discardLabel: TextView = findViewById(R.id.discard_text)
+        if (language == "english") {
+            discardLabel.text = this.resources.getString(R.string.discard_label_english)
         }
 
         val backButton: ImageView = findViewById(R.id.backGameButton)
@@ -80,7 +86,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card1Image, 0, discardDeckImage)
             } else {
-                if (language == "english"){
+                if (language == "english") {
                     createAlertPopUp(R.string.alert_playing_card_english)
 
                 } else {
@@ -124,7 +130,7 @@ class GameActivity : AppCompatActivity() {
             if (playerDeck.size == 4) {
                 playCard(card4Image, 3, discardDeckImage)
             } else {
-                if (language == "english"){
+                if (language == "english") {
                     createAlertPopUp(R.string.alert_playing_card_english)
 
                 } else {
@@ -139,7 +145,7 @@ class GameActivity : AppCompatActivity() {
         val deckRollButton: ImageView = findViewById(R.id.deckButton)
 
         deckRollButton.setOnClickListener {
-            if (deck.isEmpty()){
+            if (deck.isEmpty()) {
                 deck.addCards(discardDeck.getCards())
                 discardDeck.setEmpty()
                 discardDeckImage.setImageResource(R.drawable.discard_deck)
@@ -154,7 +160,7 @@ class GameActivity : AppCompatActivity() {
 
 
             } else {
-                if (language == "english"){
+                if (language == "english") {
                     createAlertPopUp(R.string.deck_roll_button_error_english)
 
                 } else {
@@ -182,7 +188,12 @@ class GameActivity : AppCompatActivity() {
 
         }
 
-        val restartButton: ImageView = findViewById(R.id.restartButton)
+        val restartButton: TextView = findViewById(R.id.restartButton)
+
+        if (language == "english") {
+            restartButton.text = this.resources.getString(R.string.restart_button_english)
+        }
+
         restartButton.setOnClickListener {
             board.removeAllViews()
             setBoard(characterName, board)
@@ -196,7 +207,8 @@ class GameActivity : AppCompatActivity() {
 
 
     }
-    private fun createAlertPopUp(message: Int){
+
+    private fun createAlertPopUp(message: Int) {
         val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
         val positiveButtonClick = { _: DialogInterface, _: Int ->
         }
@@ -205,11 +217,17 @@ class GameActivity : AppCompatActivity() {
         {
             setTitle(message)
             setIcon(R.drawable.alert)
-            if (language == "english"){
-                setPositiveButton(R.string.ok_button_english, DialogInterface.OnClickListener(function = positiveButtonClick))
+            if (language == "english") {
+                setPositiveButton(
+                    R.string.ok_button_english,
+                    DialogInterface.OnClickListener(function = positiveButtonClick)
+                )
 
             } else {
-                setPositiveButton(R.string.ok_button_spanish, DialogInterface.OnClickListener(function = positiveButtonClick))
+                setPositiveButton(
+                    R.string.ok_button_spanish,
+                    DialogInterface.OnClickListener(function = positiveButtonClick)
+                )
             }
             setCancelable(false)
             show()
@@ -461,15 +479,30 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun drawImageCard(card: String, cardImage: ImageView) {
-        when (card) {
-            "goForward" -> cardImage.setImageResource(R.drawable.card_go_forward)
-            "right" -> cardImage.setImageResource(R.drawable.card_right)
-            "left" -> cardImage.setImageResource(R.drawable.card_left)
-            "down" -> cardImage.setImageResource(R.drawable.card_down)
-            "up" -> cardImage.setImageResource(R.drawable.card_up)
-            "None" -> cardImage.setImageResource(R.drawable.card_back)
+        if (language == "english") {
+            when (card) {
+                "goForward" -> cardImage.setImageResource(R.drawable.card_go_forward_english)
+                "right" -> cardImage.setImageResource(R.drawable.card_right_english)
+                "left" -> cardImage.setImageResource(R.drawable.card_left_english)
+                "down" -> cardImage.setImageResource(R.drawable.card_down_english)
+                "up" -> cardImage.setImageResource(R.drawable.card_up_english)
+                "None" -> cardImage.setImageResource(R.drawable.card_back)
+
+            }
+
+        } else {
+            when (card) {
+                "goForward" -> cardImage.setImageResource(R.drawable.card_go_forward_spanish)
+                "right" -> cardImage.setImageResource(R.drawable.card_right_spanish)
+                "left" -> cardImage.setImageResource(R.drawable.card_left_spanish)
+                "down" -> cardImage.setImageResource(R.drawable.card_down_spanish)
+                "up" -> cardImage.setImageResource(R.drawable.card_up_spanish)
+                "None" -> cardImage.setImageResource(R.drawable.card_back)
+
+            }
 
         }
+
 
     }
 
@@ -536,9 +569,9 @@ class GameActivity : AppCompatActivity() {
 
                 }
             }
-                discardCard(numCard, cardImage, discardDeckImage)
+            discardCard(numCard, cardImage, discardDeckImage)
         } else {
-            if (language == "english"){
+            if (language == "english") {
                 createAlertPopUp(R.string.playing_card_error_english)
 
             } else {
@@ -549,7 +582,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun canUseTheCard(card: String): Boolean {
-        when (card){
+        when (card) {
             "right" -> {
                 return character.orientation != "right"
 
@@ -569,8 +602,9 @@ class GameActivity : AppCompatActivity() {
                 when (character.orientation) {
                     "right" -> {
                         val newPositionXRight = characterPosition[1] + 1
-                        if (isAvailablePosition(newPositionXRight)){
-                            val targetCell: Cell = matrixBoard[characterPosition[0]][newPositionXRight]
+                        if (isAvailablePosition(newPositionXRight)) {
+                            val targetCell: Cell =
+                                matrixBoard[characterPosition[0]][newPositionXRight]
                             return !(isBlockedPosition(targetCell))
 
                         }
@@ -578,22 +612,24 @@ class GameActivity : AppCompatActivity() {
                     }
                     "left" -> {
                         val newPositionXLeft = characterPosition[1] - 1
-                        if (isAvailablePosition(newPositionXLeft)){
-                            val targetCell: Cell = matrixBoard[characterPosition[0]][newPositionXLeft]
+                        if (isAvailablePosition(newPositionXLeft)) {
+                            val targetCell: Cell =
+                                matrixBoard[characterPosition[0]][newPositionXLeft]
                             return !(isBlockedPosition(targetCell))
                         }
                     }
                     "up" -> {
                         val newPositionYUp = characterPosition[0] - 1
-                        if (isAvailablePosition(newPositionYUp)){
+                        if (isAvailablePosition(newPositionYUp)) {
                             val targetCell: Cell = matrixBoard[newPositionYUp][characterPosition[1]]
                             return !(isBlockedPosition(targetCell))
                         }
                     }
                     "down" -> {
                         val newPositionYDown = characterPosition[0] + 1
-                        if (isAvailablePosition(newPositionYDown)){
-                            val targetCell: Cell = matrixBoard[newPositionYDown][characterPosition[1]]
+                        if (isAvailablePosition(newPositionYDown)) {
+                            val targetCell: Cell =
+                                matrixBoard[newPositionYDown][characterPosition[1]]
                             return !(isBlockedPosition(targetCell))
                         }
 
@@ -605,12 +641,12 @@ class GameActivity : AppCompatActivity() {
         return false
     }
 
-    private fun isAvailablePosition(move: Int): Boolean{
+    private fun isAvailablePosition(move: Int): Boolean {
         return (move < numMaxCellsInRow) && (move >= 0)
 
     }
 
-    private fun isBlockedPosition(targetCell: Cell): Boolean{
+    private fun isBlockedPosition(targetCell: Cell): Boolean {
         if (targetCell.image == "firewall") {
             findFirewallCell(targetCell)
         }
@@ -662,7 +698,7 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            if (language == "english"){
+            if (language == "english") {
                 createAlertPopUp(R.string.move_error_english)
 
             } else {
@@ -708,7 +744,7 @@ class GameActivity : AppCompatActivity() {
                 winGame()
             }
         } else {
-            if (language == "english"){
+            if (language == "english") {
                 createAlertPopUp(R.string.move_error_english)
 
             } else {
