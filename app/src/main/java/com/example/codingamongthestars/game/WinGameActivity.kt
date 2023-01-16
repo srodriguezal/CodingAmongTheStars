@@ -17,7 +17,8 @@ class WinGameActivity : AppCompatActivity() {
         val bundle = intent.extras
         language = bundle?.getString("language")
 
-        val winTextView: TextView = findViewById(R.id.winScreenTextView)
+        val winTextView1: TextView = findViewById(R.id.winScreenTextView1)
+        val winTextView2: TextView = findViewById(R.id.winScreenTextView2)
 
         val chooseLevelsButton: Button = findViewById(R.id.chooseLevelButton)
         chooseLevelsButton.setOnClickListener {
@@ -33,7 +34,8 @@ class WinGameActivity : AppCompatActivity() {
         }
 
         if (language == "english"){
-            winTextView.text = this.resources.getString(R.string.win_screen_text_english)
+            winTextView1.text = this.resources.getString(R.string.win_screen_text_english_1)
+            winTextView2.text = this.resources.getString(R.string.win_screen_text_english_2)
             chooseLevelsButton.text = this.resources.getString(R.string.yes_english)
         }
     }

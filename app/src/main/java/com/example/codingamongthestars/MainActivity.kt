@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         languageButton.setOnClickListener{
             if (language == "spanish"){
                 language = "english"
-                languageButton.setImageResource(R.drawable.spanish)
+                languageButton.setImageResource(R.drawable.english)
                 startButton.text = this.resources.getString(R.string.start_english)
 
             } else {
                 language = "spanish"
-                languageButton.setImageResource(R.drawable.english)
+                languageButton.setImageResource(R.drawable.spanish)
                 startButton.text = this.resources.getString(R.string.start_spanish)
             }
         }

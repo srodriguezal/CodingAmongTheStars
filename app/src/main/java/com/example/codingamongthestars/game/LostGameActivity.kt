@@ -25,7 +25,8 @@ class LostGameActivity : AppCompatActivity() {
         val characterName = bundle?.getString("character")
         language = bundle?.getString("language")
 
-        val lostGameTextView: TextView = findViewById(R.id.lostScreenTextView)
+        val lostGameTextView1: TextView = findViewById(R.id.lostScreenTextView1)
+        val lostGameTextView2: TextView = findViewById(R.id.lostScreenTextView2)
 
         val restart: Button = findViewById(R.id.retryButton)
         restart.setOnClickListener {
@@ -45,7 +46,8 @@ class LostGameActivity : AppCompatActivity() {
         }
 
         if (language == "english"){
-            lostGameTextView.text = this.resources.getString(R.string.lost_screen_text_english)
+            lostGameTextView1.text = this.resources.getString(R.string.lost_screen_text_english_1)
+            lostGameTextView2.text = this.resources.getString(R.string.lost_screen_text_english_2)
             restart.text= this.resources.getString(R.string.retry_english)
             finishButton.text = this.resources.getString(R.string.finish_english)
         }

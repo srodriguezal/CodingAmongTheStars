@@ -45,9 +45,13 @@
     <string name="character_selection_text_english">Choose the character that you want to help</string>
     <string name="level_selection_text_spanish">Selecciona el nivel al que quieres jugar</string>
     <string name="level_selection_text_english">Choose the level that you want to play</string>
-    <string name="lost_screen_text_spanish">¡Oh, no! ¡Backdoor y Bug se han salido con la suya!/n¿Quieres volver a intentarlo?</string>
-    <string name="lost_screen_text_english">Oh, no! Backdoor and Bug won!/n Do you want to try it again?</string>
-    <string name="win_screen_text_spanish">¡Enhorabuena! ¡Has conseguido llegar a Bitrise! ¿Quieres intentar otro nivel?</string>
-    <string name="win_screen_text_english">Congrats! You have made it to Bitrise! Do you want to play another level?</string>
+    <string name="lost_screen_text_spanish_1">¡Oh, no! ¡Backdoor y Bug se han salido con la suya!</string>
+    <string name="lost_screen_text_spanish_2">¿Quieres volver a intentarlo?</string>
+    <string name="lost_screen_text_english_1">Oh, no! Backdoor and Bug won!</string>
+    <string name="lost_screen_text_english_2">Do you want to try it again?</string>
+    <string name="win_screen_text_spanish_1">¡Enhorabuena! ¡Has conseguido llegar a Bitrise!</string>
+    <string name="win_screen_text_spanish_2">¿Quieres intentar otro nivel?</string>
+    <string name="win_screen_text_english_1">Congrats! You have made it to Bitrise!</string>
+    <string name="win_screen_text_english_2">Do you want to play another level?</string>
 
 </resources>

@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/defeat_background">
 
     <TextView
-        android:id="@+id/lostScreenTextView"
+        android:id="@+id/lostScreenTextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
         android:fontFamily="@font/zcool_qingke_huangyou"
-        android:text="@string/lost_screen_text_spanish"
+        android:text="@string/lost_screen_text_spanish_1"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/retryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lostScreenTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:text="@string/lost_screen_text_spanish_2"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="@+id/lostScreenTextView1"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/lostScreenTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/lostScreenTextView1" />
 
     <Button
         android:id="@+id/retryButton"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/retry_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintEnd_toEndOf="@+id/lostScreenTextView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lostScreenTextView2"
+        app:layout_constraintTop_toBottomOf="@+id/lostScreenTextView2" />
 
     <Button
         android:id="@+id/finishLostButton"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/finish_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/retryButton"
+        app:layout_constraintStart_toStartOf="@+id/retryButton"
         app:layout_constraintTop_toBottomOf="@+id/retryButton" />
 
 

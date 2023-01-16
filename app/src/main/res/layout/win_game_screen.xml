@@ -1,53 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/victory_background">
 
 
     <TextView
-    android:id="@+id/winScreenTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:fontFamily="@font/zcool_qingke_huangyou"
-    android:text="@string/win_screen_text_spanish"
-    android:textColor="#FFFFFF"
-    android:textSize="48sp"
-    app:layout_constraintBottom_toTopOf="@+id/chooseLevelButton"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/winScreenTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:text="@string/win_screen_text_spanish_1"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winScreenTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zcool_qingke_huangyou"
+        android:text="@string/win_screen_text_spanish_2"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="@+id/winScreenTextView1"
+        app:layout_constraintStart_toStartOf="@+id/winScreenTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/winScreenTextView1" />
 
     <Button
         android:id="@+id/chooseLevelButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/yes_spanish"
         android:textSize="60sp"
         app:backgroundTint="#090909"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintEnd_toEndOf="@+id/winScreenTextView2"
+        app:layout_constraintStart_toStartOf="@+id/winScreenTextView2"
+        app:layout_constraintTop_toBottomOf="@+id/winScreenTextView2" />
 
     <Button
         android:id="@+id/finishWinButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/no"
         android:textSize="60sp"
         app:backgroundTint="#090909"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/chooseLevelButton"
+        app:layout_constraintStart_toStartOf="@+id/chooseLevelButton"
         app:layout_constraintTop_toBottomOf="@+id/chooseLevelButton" />
 
 
