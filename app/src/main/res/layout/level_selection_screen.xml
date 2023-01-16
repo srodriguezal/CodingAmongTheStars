@@ -9,58 +9,56 @@
         android:id="@+id/levelSelectionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/level_selection_text_spanish"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/mediumLevelButton"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toEndOf="@+id/backLevelsButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/easyLevelButton"
-        android:background="@drawable/button"
-        android:layout_width="500dp"
+        android:layout_width="550dp"
         android:layout_height="100dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/easy_level_spanish"
-        android:textSize="65sp"
-        app:layout_constraintBottom_toTopOf="@+id/mediumLevelButton"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/levelSelectionTextView" />
 
     <Button
         android:id="@+id/mediumLevelButton"
-        android:background="@drawable/button"
-        android:layout_width="500dp"
+        android:layout_width="550dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/medium_level_spanish"
-        android:textSize="65sp"
-        app:layout_constraintBottom_toTopOf="@+id/hardLevelButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="@+id/easyLevelButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/easyLevelButton"
+        app:layout_constraintTop_toBottomOf="@+id/easyLevelButton" />
 
     <Button
         android:id="@+id/hardLevelButton"
-        android:background="@drawable/button"
-        android:layout_width="500dp"
+        android:layout_width="550dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button"
         android:fontFamily="@font/zcool_qingke_huangyou"
         android:text="@string/hard_level_spanish"
-        android:textSize="65sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="@+id/mediumLevelButton"
+        app:layout_constraintStart_toStartOf="@+id/mediumLevelButton"
+        app:layout_constraintTop_toBottomOf="@+id/mediumLevelButton" />
 
     <ImageView
         android:id="@+id/backLevelsButton"
