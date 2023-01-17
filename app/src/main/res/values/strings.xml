@@ -27,7 +27,7 @@
     <string name="back_button">Return to prevoius screen</string>
     <string name="help_button">Learn how to play</string>
     <string name="restart_button_spanish">REINICIAR</string>
-    <string name="restart_button_english">RESTART</string>
+    <string name="restart_button_english">RESET</string>
     <string name="discard_label_spanish">DESCARTADAS</string>
     <string name="discard_label_english">DISCARDED</string>
     <string name="path_image">Image of the path</string>
