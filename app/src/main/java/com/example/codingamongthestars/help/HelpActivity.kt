@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
 import com.example.codingamongthestars.MainActivity
 import com.example.codingamongthestars.R
 import com.example.codingamongthestars.game.GameActivity
@@ -25,9 +26,11 @@ class HelpActivity : AppCompatActivity() {
         level = bundle?.getString("level")
         characterName = bundle?.getString("character")
 
-        val characterHelpTextView: TextView = findViewById(R.id.helpTextView)
+        val helpTitleTextView: TextView = findViewById(R.id.helpTitleTextView)
+        val helpTextView: TextView = findViewById(R.id.helpTextView)
         if (language == "english"){
-            characterHelpTextView.text = this.resources.getString(R.string.help_screen_text_spanish)
+            helpTitleTextView.text = this.resources.getString(R.string.help_screen_title_english)
+            helpTextView.text = this.resources.getString(R.string.help_screen_text_english)
         }
 
         val backButton: ImageView = findViewById(R.id.backHelpButton)
