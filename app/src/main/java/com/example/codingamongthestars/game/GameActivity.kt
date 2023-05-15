@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.R
 import com.example.codingamongthestars.deck.Deck
 import com.example.codingamongthestars.deck.DiscardDeck
+import com.example.codingamongthestars.help.HelpActivity
 import com.example.codingamongthestars.mainCharacter.MainCharacter
 
 
@@ -72,8 +73,8 @@ class GameActivity : AppCompatActivity() {
         }
 
         val helpButton: ImageView = findViewById(R.id.helpGameButton)
-        helpButton.setOnClickListener {
-            //openHelpScreen()
+        helpButton.setOnClickListener{
+            showHelp()
         }
 
         val board: TableLayout = findViewById(R.id.gameTableLayout)
@@ -943,6 +944,17 @@ class GameActivity : AppCompatActivity() {
         winIntent.putExtra("language", language)
         mediaPlayer.stop()
         startActivity(winIntent)
+
+    }
+
+    private fun showHelp(){
+        val helpIntent = Intent(this, HelpActivity::class.java)
+        mediaPlayer.stop()
+        helpIntent.putExtra("level", level)
+        helpIntent.putExtra("character", characterName)
+        helpIntent.putExtra("language", language)
+        helpIntent.putExtra("screen", "game")
+        startActivity(helpIntent)
 
     }
 

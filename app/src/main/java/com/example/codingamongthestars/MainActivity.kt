@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codingamongthestars.augmentedReality.AugmentedRealityActivity
+import com.example.codingamongthestars.help.HelpActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
         var language = "spanish"
         val languageButton: ImageView = findViewById(R.id.language_button)
 
+        val helpButton: ImageView = findViewById(R.id.helpMainButton)
+
+        helpButton.setOnClickListener {
+            showHelp(language)
+        }
+
         val startButton: Button = findViewById(R.id.startButton)
 
         startButton.setOnClickListener {
@@ -55,7 +62,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private fun showHelp(language: String){
+        val helpIntent = Intent(this, HelpActivity::class.java)
+        mediaPlayer.stop()
+        helpIntent.putExtra("language", language)
+        helpIntent.putExtra("screen", "main")
+        startActivity(helpIntent)
 
+    }
     private fun startGame(language: String) {
         val startIntent = Intent(this, AugmentedRealityActivity::class.java)
         mediaPlayer.stop()

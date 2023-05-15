@@ -27,6 +27,11 @@
                 android:value="" />
         </activity>
         <activity
+            android:name="com.example.codingamongthestars.help.HelpActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+        </activity>
+        <activity
             android:name="com.example.codingamongthestars.game.GameActivity"
             android:screenOrientation="landscape"
             android:exported="true">
