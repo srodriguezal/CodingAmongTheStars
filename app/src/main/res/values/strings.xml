@@ -5,8 +5,8 @@
     <string name="card">card</string>
     <string name="start_spanish">COMENZAR</string>
     <string name="start_english">START</string>
-    <string name="ar_alert_spanish">No se ha podido acceder a la Realidad Aumentada, ¿tienes la app "Coding Among the Stars AR" instalada?</string>
-    <string name="ar_alert_english">Unable to access Augmented Reality, do you have the "Coding Among the Stars AR" app installed?</string>
+    <string name="ar_alert_spanish">No se ha podido acceder a la Realidad Aumentada, ¿tienes la extensión "Coding Among the Stars AR" instalada?</string>
+    <string name="ar_alert_english">Unable to access Augmented Reality, do you have the "Coding Among the Stars AR" DLC installed?</string>
     <string name="ar_alert_button_spanish">CERRAR</string>
     <string name="ar_alert_button_english">CLOSE</string>
     <string name="easy_level_spanish">NIVEL FÁCIL</string>
@@ -42,9 +42,9 @@
     <string name="move_error_spanish">No puedes moverte hacia ahí</string>
     <string name="move_error_english">you can not move there</string>
     <string name="ar_selection_text_spanish_1">¿Quieres jugar con Realidad Aumentada?</string>
-    <string name="ar_selection_text_spanish_2">(Se necesita tener el juego de cartas y la otra app de Coding Among the Stars instalada)</string>
+    <string name="ar_selection_text_spanish_2">(Se necesita tener el juego de cartas y la extensión de Coding Among the Stars instalada)</string>
     <string name="ar_selection_text_english_1">Do you want to play with Augmented Reality?</string>
-    <string name="ar_selection_text_english_2">(You need to have the card game and the other Coding Among the Stars app installed)</string>
+    <string name="ar_selection_text_english_2">(You need to have the card game and the Coding Among the Stars DLC installed)</string>
     <string name="character_selection_text_spanish">Selecciona al personaje al que quieres ayudar</string>
     <string name="character_selection_text_english">Choose the character that you want to help</string>
     <string name="level_selection_text_spanish">Selecciona el nivel al que quieres jugar</string>
