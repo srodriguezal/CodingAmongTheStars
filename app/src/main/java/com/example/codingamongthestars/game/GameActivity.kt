@@ -340,10 +340,10 @@ class GameActivity : AppCompatActivity() {
         for (i in (0 until numEnemies)) {
             val randomNumber1 = (0 until numCells).random()
             val randomNumber2 = (0 until numCells).random()
-            val selectedCell = matrixBoard[randomNumber1][randomNumber2]
+            val selectedCell = matrixBoard[randomNumber2][randomNumber1]
             if ((selectedCell.image == "path")) {
                 val newCell = Cell(typeEnemy, -1)
-                matrixBoard[randomNumber1][randomNumber2] = newCell
+                matrixBoard[randomNumber2][randomNumber1] = newCell
             } else {
                 val newPosition = foundFreePath(numCells, 0, 0)
                 val newCell = Cell(typeEnemy, -1)
@@ -356,19 +356,20 @@ class GameActivity : AppCompatActivity() {
         if (matrixBoard[x][y].image == "path")
             return arrayOf(x, y)
         else {
-            var xResult = 0
-            var yResult = 0
-            if (x + 1 < matrixBoard[0].size) {
-                val result = foundFreePath(numCells, x + 1, y)
-                xResult = result[0]
-                yResult = result[1]
-            } else if (y + 1 < matrixBoard[0].size) {
-                val result = foundFreePath(numCells, x, y + 1)
-                xResult = result[0]
-                yResult = result[1]
+            val xResult = (0 until numCells).random()
+            val yResult = (0 until numCells).random()
+            val selectedCell = matrixBoard[xResult][yResult]
+            return if ((selectedCell.image == "path")) {
+                arrayOf(xResult, yResult)
+            } else {
+                if (y + 1 < matrixBoard[0].size) {
+                    foundFreePath(numCells, x, y + 1)
+                } else if (x + 1 < matrixBoard[0].size) {
+                    foundFreePath(numCells, x+1, y)
+                } else {
+                    foundFreePath(numCells, 0, 0)
+                }
             }
-
-            return arrayOf(xResult, yResult)
         }
     }
 
